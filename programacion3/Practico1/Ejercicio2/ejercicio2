@@ -1,0 +1,13 @@
+Operacion|Array|Lista
+insertar |	   |
+al 		 |O(n) |o(1)
+principio|     |
+
+buscar un|     |
+elemento |O(1) |O(n)
+en una   |     |
+pos      |     |
+
+determinar|    | 
+cant      |O(n)|O(1)
+elementos |    |
