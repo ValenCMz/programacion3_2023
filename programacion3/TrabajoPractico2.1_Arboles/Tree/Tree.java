@@ -11,8 +11,13 @@ public class Tree {
 		this.left = null;
 		this.right = null;
 	}
-
-	//
+	
+	public Tree()
+	{
+		this.value =null;
+		this.left =null;
+			this.right = null;
+	}
 	
 	public Integer getValue() {
 		return value;
@@ -91,12 +96,36 @@ public class Tree {
 				return this.right.hasElement(valueCompare);
 			}
 		}
-		
-		
-		return false;
-		
-		
-		
+		return false;	
 	}
 	
+	public boolean isEmpty() {
+		if(this.getRoot()==null) {
+			return true;
+		}
+		return false;
+	}
+	
+	public int getHeight() {
+		if(this.isEmpty()) {
+			return 0;
+		}
+		int contLeft = 0;
+		int contRight = 0;
+		if(this.left!=null) {
+			contLeft = this.left.getHeight();
+		}
+		if(this.right!=null) {
+			contRight = this.right.getHeight();
+		}
+		
+		if(contLeft>contRight) {
+			return contLeft +1;
+		}else {
+			return contRight +1;
+		}
+		
+		
+	
+	}
 }
