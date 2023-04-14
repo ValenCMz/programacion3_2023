@@ -113,19 +113,22 @@ public class Tree {
 		int contLeft = 0;
 		int contRight = 0;
 		if(this.left!=null) {
-			contLeft = this.left.getHeight();
+			contLeft = this.left.getHeight() + 1;
 		}
 		if(this.right!=null) {
-			contRight = this.right.getHeight();
+			contRight = this.right.getHeight() + 1;
 		}
 		
 		if(contLeft>contRight) {
-			return contLeft +1;
+			return contLeft ;
 		}else {
-			return contRight +1;
+			return contRight ;
 		}
+		
 		
 		
 	
 	}
+	
+
 }

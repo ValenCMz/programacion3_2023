@@ -41,17 +41,27 @@ public class main {
 
 		
 		//usado para el getHeight
-			Tree arbolHeight = new Tree(5);
-			arbolHeight.add(2);
-			arbolHeight.add(1);
-			arbolHeight.add(3);
-			arbolHeight.add(8);
-			arbolHeight.add(6);
+			Tree arbolHeight = new Tree(15);
 			arbolHeight.add(10);
+			arbolHeight.add(9);
+			arbolHeight.add(7);
 			arbolHeight.add(11);
-			arbolHeight.add(14);
-			arbolHeight.add(4);
-			arbolHeight.add(15);
+			arbolHeight.add(17);
+			arbolHeight.add(16);
+			arbolHeight.add(19);
+			
+			
+//			arbolHeight.add(2);
+//			arbolHeight.add(1);
+//			arbolHeight.add(3);
+//			arbolHeight.add(4);
+//			arbolHeight.add(8);
+//			arbolHeight.add(6);
+//			arbolHeight.add(10);
+//			arbolHeight.add(11);
+//			arbolHeight.add(14);
+//			arbolHeight.add(15);
+
 			arbolHeight.imprimirAbolPreOrden();
 
 			System.out.println("El tamaño del arbol es de " + arbolHeight.getHeight());
