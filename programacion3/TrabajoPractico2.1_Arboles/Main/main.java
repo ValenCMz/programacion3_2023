@@ -18,6 +18,7 @@ public class main {
 //		 5
 //	  2		  8
 //1 	 3  6	10	
+		System.out.println("Arbol impreso en pre orden");
 		arbolImprimir.imprimirAbolPreOrden();
 		
 		
@@ -63,7 +64,20 @@ public class main {
 			arbolImprimirPostOrder.add(7);
 			arbolImprimirPostOrder.add(9);
 			
+			System.out.println("Arbol impreso en post order");
 			arbolImprimirPostOrder.imprimirArbolPostOrder();
+			
+			//usado para imprimir in-order
+			Tree arbolImprimirInOrder = new Tree(5);
+			arbolImprimirInOrder.add(3);
+			arbolImprimirInOrder.add(1);
+			arbolImprimirInOrder.add(4);
+			arbolImprimirInOrder.add(8);
+			arbolImprimirInOrder.add(7);
+			arbolImprimirInOrder.add(9);
+			
+			System.out.println("Arbol impreso in order");
+			arbolImprimirInOrder.imprimirArbolOrder();
 
 	}
 

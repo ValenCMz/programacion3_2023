@@ -90,6 +90,18 @@ public class Tree {
 		
 	}
 	
+	//No puedo agregarle los "-" de cuando su izquierda o derecha es null
+	public void imprimirArbolOrder() {
+		if(this.left!=null) {
+			this.left.imprimirArbolOrder();
+		}
+		System.out.println(this.value);
+		
+		if(this.right!=null) {
+			this.right.imprimirArbolOrder();
+		}
+	}
+	
 	public Integer getRoot() {
 		Integer toReturn = null;
 		if(this.value!=null) {
