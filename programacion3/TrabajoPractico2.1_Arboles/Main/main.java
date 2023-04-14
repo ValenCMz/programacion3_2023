@@ -1,5 +1,7 @@
 package Main;
 
+import java.util.ArrayList;
+
 import Tree.Tree;
 
 public class main {
@@ -78,6 +80,27 @@ public class main {
 			
 			System.out.println("Arbol impreso in order");
 			arbolImprimirInOrder.imprimirArbolOrder();
+			
+			//usado para getLongestBranch()
+			Tree arbolGetLongestBranch = new Tree(15);
+			arbolGetLongestBranch.add(10);
+			arbolGetLongestBranch.add(9);
+			arbolGetLongestBranch.add(11);
+			arbolGetLongestBranch.add(7);
+			arbolGetLongestBranch.add(17);
+			arbolGetLongestBranch.add(16);
+			arbolGetLongestBranch.add(19);
+			
+			System.out.println("Imprimir arbol rama mas larga, en pre orden");
+			arbolGetLongestBranch.imprimirAbolPreOrden();
+			ArrayList<Integer>longestBrach = new ArrayList<>();
+			
+			longestBrach= arbolGetLongestBranch.getLongestBranch();
+			
+			System.out.println("Imprimir rama mas larga");
+			for (Integer integer : longestBrach) {
+				System.out.println(integer);
+			}
 
 	}
 

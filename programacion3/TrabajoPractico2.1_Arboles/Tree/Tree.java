@@ -1,5 +1,7 @@
 package Tree;
 
+import java.util.ArrayList;
+
 public class Tree {
 
 	private Integer value;
@@ -165,10 +167,28 @@ public class Tree {
 		}else {
 			return contRight ;
 		}
-		
-		
-		
+	}
 	
+	public ArrayList<Integer> getLongestBranch(){
+		ArrayList<Integer>toReturn = new ArrayList<>();
+		//devolver los elementos de la rama mas larga
+		//¿cual es la rama mas larga?
+			//Es la que tiene de tamaño lo mismo que la altura del arbol
+		ArrayList<Integer>bLeft = new ArrayList<>();
+		ArrayList<Integer>bRight = new ArrayList<>();
+		if(this.left!=null) {
+			bLeft.add(this.left.getValue());
+		}
+		if(this.right!=null) {
+			bRight.add(this.right.getValue());
+		}
+		if(bLeft.size()>bRight.size()) {
+			toReturn.addAll(bLeft);
+		}else {
+			toReturn.addAll(bRight);
+		}
+		
+		return toReturn;
 	}
 	
 
