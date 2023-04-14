@@ -70,6 +70,26 @@ public class Tree {
 	
 	}
 	
+	public void imprimirArbolPostOrder() {
+		//tendria q recorrer el arbol
+			//Y voy a imprimir el arbol la ultima vez q pase por el
+		
+		if(this.left!=null) {
+			this.left.imprimirArbolPostOrder();
+		}
+		
+		if(this.right!=null) {
+			this.right.imprimirArbolPostOrder();
+		}
+		
+		System.out.println(this.value);
+	
+		if((this.left==null)&&(this.right==null)){
+			System.out.println("-\n" + "-");
+		}
+		
+	}
+	
 	public Integer getRoot() {
 		Integer toReturn = null;
 		if(this.value!=null) {
@@ -99,6 +119,7 @@ public class Tree {
 		return false;	
 	}
 	
+	
 	public boolean isEmpty() {
 		if(this.getRoot()==null) {
 			return true;
@@ -106,19 +127,27 @@ public class Tree {
 		return false;
 	}
 	
+	
+	//si el arbol esta vacio la altura es -1, si tiene un solo nodo tendria q dar 0, y si no hay que contar cada salto
 	public int getHeight() {
+		//si el arbol esta vacio la altura del arbol va a ser 0
 		if(this.isEmpty()) {
-			return 0;
+			return -1;
 		}
+		//inicializo las variables 
 		int contLeft = 0;
 		int contRight = 0;
+		//si el arbol tiene un subArbol izquierdo, le delego de forma recursiva su calculo
 		if(this.left!=null) {
+			//va delengando hasta q llega a la ultima hoja, la ultima hoja no va a tener hijos
+			//la ultima hoja va a tener de h = 0, le sumamos 1 porque seria un salto
 			contLeft = this.left.getHeight() + 1;
 		}
+		//lo mismo con el lado derecho
 		if(this.right!=null) {
 			contRight = this.right.getHeight() + 1;
 		}
-		
+		//nos vamos a quedar con la altura mas grande
 		if(contLeft>contRight) {
 			return contLeft ;
 		}else {
