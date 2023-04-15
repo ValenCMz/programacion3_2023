@@ -83,13 +83,15 @@ public class main {
 			
 			//usado para getLongestBranch()
 			Tree arbolGetLongestBranch = new Tree(15);
-			arbolGetLongestBranch.add(10);
-			arbolGetLongestBranch.add(9);
-			arbolGetLongestBranch.add(11);
-			arbolGetLongestBranch.add(7);
-			arbolGetLongestBranch.add(17);
-			arbolGetLongestBranch.add(16);
+			arbolGetLongestBranch.add(14);
+			arbolGetLongestBranch.add(13);
+			arbolGetLongestBranch.add(12);
+			arbolGetLongestBranch.add(21);
+			arbolGetLongestBranch.add(20);
 			arbolGetLongestBranch.add(19);
+			arbolGetLongestBranch.add(18);
+			arbolGetLongestBranch.add(24);
+			arbolGetLongestBranch.add(26);
 			
 			System.out.println("Imprimir arbol rama mas larga, en pre orden");
 			arbolGetLongestBranch.imprimirAbolPreOrden();

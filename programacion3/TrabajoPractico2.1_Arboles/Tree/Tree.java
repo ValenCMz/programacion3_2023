@@ -171,23 +171,29 @@ public class Tree {
 	
 	public ArrayList<Integer> getLongestBranch(){
 		ArrayList<Integer>toReturn = new ArrayList<>();
-		//devolver los elementos de la rama mas larga
-		//¿cual es la rama mas larga?
-			//Es la que tiene de tamaño lo mismo que la altura del arbol
+		
 		ArrayList<Integer>bLeft = new ArrayList<>();
 		ArrayList<Integer>bRight = new ArrayList<>();
+		
 		if(this.left!=null) {
-			bLeft.add(this.left.getValue());
+			bLeft.add(this.value);
+			bLeft.addAll(this.left.getLongestBranch()) ;
 		}
 		if(this.right!=null) {
-			bRight.add(this.right.getValue());
+			bRight.add(this.value);
+			bRight.addAll(this.right.getLongestBranch());
 		}
+		
+		if(this.left==null &&this.right==null) {
+			bLeft.add(this.value);
+			bRight.add(this.value);
+		}
+		
 		if(bLeft.size()>bRight.size()) {
 			toReturn.addAll(bLeft);
 		}else {
 			toReturn.addAll(bRight);
 		}
-		
 		return toReturn;
 	}
 	
