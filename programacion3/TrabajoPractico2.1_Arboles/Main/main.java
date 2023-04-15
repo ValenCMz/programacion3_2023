@@ -103,6 +103,24 @@ public class main {
 			for (Integer integer : longestBrach) {
 				System.out.println(integer);
 			}
+			
+			//usado para getFrontera()
+			Tree arbolGetFrontera = new Tree(15);
+			arbolGetFrontera.add(10);
+			arbolGetFrontera.add(9);
+			arbolGetFrontera.add(7);
+			arbolGetFrontera.add(11);
+			arbolGetFrontera.add(17);
+			arbolGetFrontera.add(16);
+			arbolGetFrontera.add(19);
+			System.out.println("Imprimir arbol get frontera, en pre orden");
+			arbolGetFrontera.imprimirAbolPreOrden();
+			ArrayList<Integer>arrayGetFrontera = new ArrayList<>();
+			System.out.println("imprimir frontera");
+			arrayGetFrontera = arbolGetFrontera.getFrontera(); 
+			for (Integer a : arrayGetFrontera) {
+				System.out.println(a);
+			}
 
 	}
 

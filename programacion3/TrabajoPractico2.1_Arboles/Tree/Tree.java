@@ -197,5 +197,24 @@ public class Tree {
 		return toReturn;
 	}
 	
+	public ArrayList<Integer> getFrontera(){
+		ArrayList<Integer> toReturn = new ArrayList<>();		
+	
+		if(this.left==null && this.right==null) {
+			toReturn.add(this.value);
+		}
+		
+		if(this.left!=null) {	
+			toReturn.addAll(this.left.getFrontera());
+		}
+		
+		if(this.right!=null) {
+			toReturn.addAll(this.right.getFrontera());
+		}
+		
+		
+		return toReturn;
+	}
+	
 
 }
