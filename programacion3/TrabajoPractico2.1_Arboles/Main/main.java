@@ -121,6 +121,17 @@ public class main {
 			for (Integer a : arrayGetFrontera) {
 				System.out.println(a);
 			}
+			
+			//usado para el getMaxElem
+			Tree arbolGetMaxElem = new Tree(15);
+			arbolGetMaxElem.add(10);
+			arbolGetMaxElem.add(9);
+			arbolGetMaxElem.add(7);
+			arbolGetMaxElem.add(11);
+			arbolGetMaxElem.add(17);
+			arbolGetMaxElem.add(16);
+			arbolGetMaxElem.add(19);
+			System.out.println("El elemento mas grande del arbol es: " + arbolGetMaxElem.getMaxElem());
 
 	}
 

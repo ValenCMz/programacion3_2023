@@ -212,9 +212,22 @@ public class Tree {
 			toReturn.addAll(this.right.getFrontera());
 		}
 		
-		
 		return toReturn;
 	}
 	
+	public Integer getMaxElem() {
+		Integer toReturn = 0;
+	
+		if(this.right==null) {
+			toReturn = this.value;
+		}	
+		
+		if(this.right!=null) {
+			toReturn = this.right.getMaxElem();
+		}
+		
+		return toReturn;
+		
+	}
 
 }
