@@ -133,6 +133,21 @@ public class main {
 			arbolGetMaxElem.add(19);
 			System.out.println("El elemento mas grande del arbol es: " + arbolGetMaxElem.getMaxElem());
 
+			//usado para getElemeAtLevel
+			Tree arbolGetElemAtLevel = new Tree(15);
+			arbolGetElemAtLevel.add(10);
+			arbolGetElemAtLevel.add(9);
+			arbolGetElemAtLevel.add(7);
+			arbolGetElemAtLevel.add(11);
+			arbolGetElemAtLevel.add(17);
+			arbolGetElemAtLevel.add(16);
+			arbolGetElemAtLevel.add(19);
+			ArrayList<Integer> arrayGetElemAtLevel = new ArrayList<>();
+			arrayGetElemAtLevel = arbolGetElemAtLevel.getElemAtLevel(2);
+			System.out.println("Los elementos del nivel " +  2 + " son: ");
+			for (Integer b : arrayGetElemAtLevel) {
+				System.out.println(b);
+			}
 	}
 
 

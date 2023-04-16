@@ -229,5 +229,26 @@ public class Tree {
 		return toReturn;
 		
 	}
+	
+	public ArrayList<Integer> getElemAtLevel(int level) {
+		ArrayList<Integer>toReturn = new ArrayList<>();
+		
+		//tengo q trar los elementos de un nivel
+		//me voy a ir agregando hasta q llegue a ese nivel
+		//me imagino q voy a llegar al nivel y desde ahi voy a ir regresando
+		if(level == 0) {
+			toReturn.add(this.value);
+		}
+		if(this.left!=null) {
+			toReturn.addAll(this.left.getElemAtLevel(level-1));
+		}
+		if(this.right!=null) {
+			toReturn.addAll(this.right.getElemAtLevel(level-1));
+		}
+			
+		return toReturn;
+		
+		
+	}
 
 }
