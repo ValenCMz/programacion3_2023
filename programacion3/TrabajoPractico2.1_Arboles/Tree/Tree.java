@@ -379,16 +379,24 @@ public class Tree {
 	
 	public ArrayList<Integer> obtenerHojasMayoresK(Integer k){
 		ArrayList<Integer>toReturn = new ArrayList<>();
-		//debo llegar al nodo que k == value
-			//debo buscar la hojas mayores a este
-		if(k > this.value) {
-			if(this.right!=null) {
-				if(this.value>k) {
-					toReturn.add(this.value);
-				}
-				toReturn.addAll(this.right.obtenerHojasMayoresK(k));
-			}
+		if(this.isEmpty()) {
+			toReturn.add(-1);
+			return toReturn;
 		}
+
+		if(this.left!=null) {
+			toReturn.addAll(this.left.obtenerHojasMayoresK(k));
+		}
+		
+		if(this.right!=null) {
+			toReturn.addAll(this.right.obtenerHojasMayoresK(k));
+		}
+
+	
+		if((this.left==null&&this.right==null) && this.value>k ) {
+			toReturn.add(this.value);
+		}
+		
 		return toReturn;
 	}
 	
