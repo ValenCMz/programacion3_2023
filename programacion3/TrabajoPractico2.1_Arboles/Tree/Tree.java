@@ -351,5 +351,22 @@ public class Tree {
 		
 		return toReturn;
 	}
+	
+	//tendre q contar la raiz?
+	public Integer sumNodosInternos() {
+		Integer sum = 0;
+		if(this.isEmpty()) {
+			return 0;
+		}
+		if(this.left!=null) {
+			sum += this.left.sumNodosInternos() ;
+		}
+		if(this.right!=null) {
+			sum += this.right.sumNodosInternos() ;
+		}
+	
+		sum+=this.value;
+		return sum;
+	}
 
 }
