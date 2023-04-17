@@ -148,6 +148,23 @@ public class main {
 			for (Integer b : arrayGetElemAtLevel) {
 				System.out.println(b);
 			}
+			
+			//usado para delete
+			
+			Tree arbolDelete = new Tree(15);
+			arbolDelete.add(10);
+			arbolDelete.add(9);
+			arbolDelete.add(7);
+			arbolDelete.add(11);
+			arbolDelete.add(17);
+			arbolDelete.add(16);
+			arbolDelete.add(19);
+			
+			System.out.println("imprimir arbolDelete en pre orden: ");
+			arbolDelete.imprimirAbolPreOrden();
+			System.out.println("Se elimino el elemento? " + arbolDelete.delete(20)+ "\n imprimir arbol resultante ");
+			arbolDelete.imprimirAbolPreOrden();
+
 	}
 
 

@@ -246,9 +246,63 @@ public class Tree {
 			toReturn.addAll(this.right.getElemAtLevel(level-1));
 		}
 			
+		return toReturn;	
+	}
+	
+	private Tree getNMI(){
+		Tree toReturn = new Tree();	
+		if(this.left!=null) {
+			toReturn = this.left.getNMI();
+		}
+		
+		if(this.left==null&&this.right==null) {
+			toReturn = this;
+		}
 		return toReturn;
+	}
+	
+	private Tree getNMD() {
+		Tree toReturn = new Tree();	
+		if(this.right!=null) {
+			toReturn = this.right.getNMD();
+		}
 		
+		if(this.left==null&&this.right==null) {
+			toReturn = this;
+		}
+		return toReturn;
+	}
+	
+	public boolean delete(Integer valueToDelete) {
+		boolean toReturn = false;
+		//caso en el que el valor este a la izquierda
+		if(valueToDelete<=this.value) {
+			//caso de que sea una hoja
+			if(this.left!=null) {
+				toReturn = this.left.delete(valueToDelete);
+			}
+			//llega al ultimo nodo (una hoja) y la elimina
+			if((this.left==null&&this.right==null)&&(this.value==valueToDelete)) {
+				this.value = null;
+				toReturn = true;
+			}
+		}
+		//el valor que se busca es mayor, osea esta a la derecha
+		else if(valueToDelete>=this.value) {
+			//caso de que sea una hoja
+			if(this.right!=null) {
+				toReturn = this.right.delete(valueToDelete);
+			}
+			//llega al ultimo nodo (una hoja) y la elimina
+			if((this.left==null && this.right==null)&&(this.value==valueToDelete)) {
+				this.value = null;
+				toReturn = true;
+
+			}
+	
+		}
 		
+		return toReturn;
 	}
 
 }
