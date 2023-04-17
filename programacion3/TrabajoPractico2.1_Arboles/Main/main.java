@@ -178,6 +178,22 @@ public class main {
 			
 			System.out.println(sum.sumNodosInternos());
 			
+			//usado para ejercicio 3
+			Tree ejercicio3 = new Tree(6);
+			ejercicio3.add(2);
+			ejercicio3.add(1);
+			ejercicio3.add(4);
+			ejercicio3.add(10);
+			ejercicio3.add(11);
+			ejercicio3.add(8);
+			ejercicio3.add(7);
+			ejercicio3.add(9);
+			ArrayList<Integer>ej3 = new ArrayList<>();
+			ej3 = ejercicio3.obtenerHojasMayoresK(8);
+			
+			for (Integer j3 : ej3) {
+				System.out.println(j3);
+			}
 
 	}
 
