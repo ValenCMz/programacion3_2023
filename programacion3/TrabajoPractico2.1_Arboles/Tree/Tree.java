@@ -273,19 +273,66 @@ public class Tree {
 		return toReturn;
 	}
 	
+	//necesito el padre para el caso 2 de eliminar un nodo
+	private Tree getPadre(Integer valueHijo) {
+		//si el valor del hijo es menor
+		if(valueHijo<=this.value) {
+			//busco x la izquierda
+			if(this.left!=null) {
+				//el valor de mi izquierda es el mismo que el de im hijo
+				if(this.left.value.equals(valueHijo)) {
+					//si lo es me retorno yo xq soy el padre
+					return this;
+				}else {
+					//si no se lo delego a mi hijo de la izquieda
+					return this.left.getPadre(valueHijo);
+				}
+			}
+		}
+	    else if (valueHijo >= this.value) {
+	        if (this.right != null) {
+	            if (this.right.value.equals(valueHijo)) {
+	                return this;
+	            } else {
+	                return this.right.getPadre(valueHijo);
+	            }
+	        }
+	    }
+		return null;
+	}
+	
 	public boolean delete(Integer valueToDelete) {
+	
 		boolean toReturn = false;
 		//caso en el que el valor este a la izquierda
 		if(valueToDelete<=this.value) {
 			//caso de que sea una hoja
-			if(this.left!=null) {
-				toReturn = this.left.delete(valueToDelete);
-			}
-			//llega al ultimo nodo (una hoja) y la elimina
-			if((this.left==null&&this.right==null)&&(this.value==valueToDelete)) {
-				this.value = null;
-				toReturn = true;
-			}
+				if(this.left!=null) {
+					toReturn = this.left.delete(valueToDelete);
+				}
+				//llega al ultimo nodo (una hoja) y la elimina
+				if((this.left==null&&this.right==null)&&(this.value==valueToDelete)) {
+					this.value = null;
+					toReturn = true;
+				}
+			//caso 2. El arbol tiene un solo hijo izquierdo
+				if((this.left!=null && this.right==null)&&(this.value==valueToDelete)) {
+					//acomodar el puntero para ignorar el nodo borrado y apuntar al hijo
+					//necesitaria mi nodo padre y a este ponerle como izq o derecha mi hijo
+					Tree padre = this.getPadre(valueToDelete);
+					padre.left = this.left;
+					this.value = null;
+					toReturn = true;
+
+				}
+				//el arbol tiene un solo hijo derecho
+				else if((this.left==null && this.right!=null)&&(this.value==valueToDelete)) {
+					Tree padre = this.getPadre(valueToDelete);
+					padre.right = this.right;
+					this.value = null;
+					toReturn = true;
+				}
+				
 		}
 		//el valor que se busca es mayor, osea esta a la derecha
 		else if(valueToDelete>=this.value) {

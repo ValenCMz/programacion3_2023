@@ -160,9 +160,10 @@ public class main {
 			arbolDelete.add(16);
 			arbolDelete.add(19);
 			
+			
 			System.out.println("imprimir arbolDelete en pre orden: ");
 			arbolDelete.imprimirAbolPreOrden();
-			System.out.println("Se elimino el elemento? " + arbolDelete.delete(20)+ "\n imprimir arbol resultante ");
+			System.out.println("Se elimino el elemento? " + arbolDelete.delete(9)+ "\n imprimir arbol resultante ");
 			arbolDelete.imprimirAbolPreOrden();
 
 	}
