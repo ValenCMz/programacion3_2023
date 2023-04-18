@@ -380,14 +380,6 @@ public class Tree {
 		return sum;
 	}
 	
-//	Ejercicio 3
-//	Dado un árbol binario de búsqueda que almacena
-//	números enteros y un valor de entrada K, implementar un
-//	algoritmo que permita obtener un listado con los valores
-//	de todas las hojas cuyo valor supere K. Por ejemplo, para
-//	el árbol de la derecha, con un valor K = 8, el resultado
-//	debería ser [9, 11].
-	
 	public ArrayList<Integer> obtenerHojasMayoresK(Integer k){
 		ArrayList<Integer>toReturn = new ArrayList<>();
 		if(this.isEmpty()) {
