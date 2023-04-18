@@ -305,6 +305,7 @@ public class Tree {
 	
 		boolean toReturn = false;
 		//caso en el que el valor este a la izquierda
+		
 		if(valueToDelete<=this.value) {
 			//caso de que sea una hoja
 				if(this.left!=null) {
@@ -327,6 +328,19 @@ public class Tree {
 				else if((this.left==null && this.right!=null)&&(this.value==valueToDelete)) {
 					padre.right = this.right;
 					this.value = null;
+					toReturn = true;
+				}
+				
+			//caso 3. El arbol tiene 2 hijos
+				//la teoria seria: remplazar el valor por el Nodo mas izquierdo del subarbol derecho
+				//luego borrar el NMISD
+				if(this.left!=null && this.right!=null) {
+					//obtengo el NMISD(nodo mas izquierdo del subarbol derecho)
+					Tree NMISD = this.right.getNMI();
+					//remplazo el valor por este
+					this.value = NMISD.getValue();
+					//y le pido a el mismo que se elimine del arbol
+					NMISD.delete(NMISD.getValue(), this);
 					toReturn = true;
 				}
 				

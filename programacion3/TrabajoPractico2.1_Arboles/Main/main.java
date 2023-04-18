@@ -151,19 +151,18 @@ public class main {
 //			
 			//usado para delete
 			
-			Tree arbolDelete = new Tree(15);
-			arbolDelete.add(10);
-			arbolDelete.add(9);
-			arbolDelete.add(7);
-			arbolDelete.add(11);
-			arbolDelete.add(17);
-			arbolDelete.add(16);
-			arbolDelete.add(19);
+			Tree arbolDelete = new Tree(10);
+			arbolDelete.add(5);
+			arbolDelete.add(2);
+			arbolDelete.add(30);
+			arbolDelete.add(25);
+			arbolDelete.add(45);
+
 			
 			
 			System.out.println("imprimir arbolDelete en pre orden: ");
 			arbolDelete.imprimirAbolPreOrden();
-			System.out.println("Se elimino el elemento? " + arbolDelete.delete(9, arbolDelete)+ "\n imprimir arbol resultante ");
+			System.out.println("Se elimino el elemento? " + arbolDelete.delete(10, arbolDelete)+ "\n imprimir arbol resultante ");
 			arbolDelete.imprimirAbolPreOrden();
 			
 			//usado para ejercicio 2, suma de todos los nodos internos del arbol
