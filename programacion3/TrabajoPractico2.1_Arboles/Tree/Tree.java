@@ -301,14 +301,14 @@ public class Tree {
 		return null;
 	}
 	
-	public boolean delete(Integer valueToDelete) {
+	public boolean delete(Integer valueToDelete, Tree padre) {
 	
 		boolean toReturn = false;
 		//caso en el que el valor este a la izquierda
 		if(valueToDelete<=this.value) {
 			//caso de que sea una hoja
 				if(this.left!=null) {
-					toReturn = this.left.delete(valueToDelete);
+					toReturn = this.left.delete(valueToDelete,this);
 				}
 				//llega al ultimo nodo (una hoja) y la elimina
 				if((this.left==null&&this.right==null)&&(this.value==valueToDelete)) {
@@ -318,8 +318,6 @@ public class Tree {
 			//caso 2. El arbol tiene un solo hijo izquierdo
 				if((this.left!=null && this.right==null)&&(this.value==valueToDelete)) {
 					//acomodar el puntero para ignorar el nodo borrado y apuntar al hijo
-					//necesitaria mi nodo padre y a este ponerle como izq o derecha mi hijo
-					Tree padre = this.getPadre(valueToDelete);
 					padre.left = this.left;
 					this.value = null;
 					toReturn = true;
@@ -327,7 +325,6 @@ public class Tree {
 				}
 				//el arbol tiene un solo hijo derecho
 				else if((this.left==null && this.right!=null)&&(this.value==valueToDelete)) {
-					Tree padre = this.getPadre(valueToDelete);
 					padre.right = this.right;
 					this.value = null;
 					toReturn = true;
@@ -338,7 +335,7 @@ public class Tree {
 		else if(valueToDelete>=this.value) {
 			//caso de que sea una hoja
 			if(this.right!=null) {
-				toReturn = this.right.delete(valueToDelete);
+				toReturn = this.right.delete(valueToDelete,this);
 			}
 			//llega al ultimo nodo (una hoja) y la elimina
 			if((this.left==null && this.right==null)&&(this.value==valueToDelete)) {

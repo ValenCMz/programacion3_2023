@@ -149,51 +149,51 @@ public class main {
 //				System.out.println(b);
 //			}
 //			
-//			//usado para delete
-//			
-//			Tree arbolDelete = new Tree(15);
-//			arbolDelete.add(10);
-//			arbolDelete.add(9);
-//			arbolDelete.add(7);
-//			arbolDelete.add(11);
-//			arbolDelete.add(17);
-//			arbolDelete.add(16);
-//			arbolDelete.add(19);
-//			
-//			
-//			System.out.println("imprimir arbolDelete en pre orden: ");
-//			arbolDelete.imprimirAbolPreOrden();
-//			System.out.println("Se elimino el elemento? " + arbolDelete.delete(9)+ "\n imprimir arbol resultante ");
-//			arbolDelete.imprimirAbolPreOrden();
+			//usado para delete
+			
+			Tree arbolDelete = new Tree(15);
+			arbolDelete.add(10);
+			arbolDelete.add(9);
+			arbolDelete.add(7);
+			arbolDelete.add(11);
+			arbolDelete.add(17);
+			arbolDelete.add(16);
+			arbolDelete.add(19);
+			
+			
+			System.out.println("imprimir arbolDelete en pre orden: ");
+			arbolDelete.imprimirAbolPreOrden();
+			System.out.println("Se elimino el elemento? " + arbolDelete.delete(9, arbolDelete)+ "\n imprimir arbol resultante ");
+			arbolDelete.imprimirAbolPreOrden();
 			
 			//usado para ejercicio 2, suma de todos los nodos internos del arbol
-			Tree sum = new Tree(15);
-			sum.add(10);
-			sum.add(9);
-			sum.add(7);
-			sum.add(11);
-			sum.add(17);
-			sum.add(16);
-			sum.add(19);
-			
-			System.out.println(sum.sumNodosInternos());
-			
-			//usado para ejercicio 3
-			Tree ejercicio3 = new Tree(6);
-			ejercicio3.add(2);
-			ejercicio3.add(1);
-			ejercicio3.add(4);
-			ejercicio3.add(10);
-			ejercicio3.add(11);
-			ejercicio3.add(8);
-			ejercicio3.add(7);
-			ejercicio3.add(9);
-			ArrayList<Integer>ej3 = new ArrayList<>();
-			ej3 = ejercicio3.obtenerHojasMayoresK(8);
-			
-			for (Integer j3 : ej3) {
-				System.out.println(j3);
-			}
+//			Tree sum = new Tree(15);
+//			sum.add(10);
+//			sum.add(9);
+//			sum.add(7);
+//			sum.add(11);
+//			sum.add(17);
+//			sum.add(16);
+//			sum.add(19);
+//			
+//			System.out.println(sum.sumNodosInternos());
+//			
+//			//usado para ejercicio 3
+//			Tree ejercicio3 = new Tree(6);
+//			ejercicio3.add(2);
+//			ejercicio3.add(1);
+//			ejercicio3.add(4);
+//			ejercicio3.add(10);
+//			ejercicio3.add(11);
+//			ejercicio3.add(8);
+//			ejercicio3.add(7);
+//			ejercicio3.add(9);
+//			ArrayList<Integer>ej3 = new ArrayList<>();
+//			ej3 = ejercicio3.obtenerHojasMayoresK(8);
+//			
+//			for (Integer j3 : ej3) {
+//				System.out.println(j3);
+//			}
 
 	}
 
