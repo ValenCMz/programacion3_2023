@@ -135,10 +135,7 @@ public class Tree {
 	
 	
 	public boolean isEmpty() {
-		if(this.getRoot()==null) {
-			return true;
-		}
-		return false;
+		return this.getRoot()==null;
 	}
 	
 	
@@ -259,46 +256,6 @@ public class Tree {
 			toReturn = this;
 		}
 		return toReturn;
-	}
-	
-	private Tree getNMD() {
-		Tree toReturn = new Tree();	
-		if(this.right!=null) {
-			toReturn = this.right.getNMD();
-		}
-		
-		if(this.left==null&&this.right==null) {
-			toReturn = this;
-		}
-		return toReturn;
-	}
-	
-	//necesito el padre para el caso 2 de eliminar un nodo
-	private Tree getPadre(Integer valueHijo) {
-		//si el valor del hijo es menor
-		if(valueHijo<=this.value) {
-			//busco x la izquierda
-			if(this.left!=null) {
-				//el valor de mi izquierda es el mismo que el de im hijo
-				if(this.left.value.equals(valueHijo)) {
-					//si lo es me retorno yo xq soy el padre
-					return this;
-				}else {
-					//si no se lo delego a mi hijo de la izquieda
-					return this.left.getPadre(valueHijo);
-				}
-			}
-		}
-	    else if (valueHijo >= this.value) {
-	        if (this.right != null) {
-	            if (this.right.value.equals(valueHijo)) {
-	                return this;
-	            } else {
-	                return this.right.getPadre(valueHijo);
-	            }
-	        }
-	    }
-		return null;
 	}
 	
 	public boolean delete(Integer valueToDelete, Tree padre) {
