@@ -246,16 +246,13 @@ public class Tree {
 		return toReturn;	
 	}
 	
-	private Tree getNMI(){
-		Tree toReturn = new Tree();	
-		if(this.left!=null) {
-			toReturn = this.left.getNMI();
-		}
-		
-		if(this.left==null&&this.right==null) {
-			toReturn = this;
-		}
-		return toReturn;
+	
+	public Tree getNMI(){
+		Tree toReturn = this;
+		if(toReturn.left != null){
+			return toReturn.left.getNMI();
+		} 
+		else return toReturn;
 	}
 	
 	public boolean delete(Integer valueToDelete, Tree padre) {
@@ -291,7 +288,7 @@ public class Tree {
 			//caso 3. El arbol tiene 2 hijos
 				//la teoria seria: remplazar el valor por el Nodo mas izquierdo del subarbol derecho
 				//luego borrar el NMISD
-				if(this.left!=null && this.right!=null) {
+				if((this.left!=null && this.right!=null) && (this.value==valueToDelete)) {
 					//obtengo el NMISD(nodo mas izquierdo del subarbol derecho)
 					Tree NMISD = this.right.getNMI();
 					//remplazo el valor por este
@@ -314,6 +311,10 @@ public class Tree {
 				toReturn = true;
 
 			}
+			
+			
+			
+			
 	
 		}
 		
