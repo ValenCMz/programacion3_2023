@@ -165,17 +165,17 @@ public class main {
 //			System.out.println("Se elimino el elemento? " + arbolDelete.delete(10, arbolDelete)+ "\n imprimir arbol resultante ");
 //			arbolDelete.imprimirAbolPreOrden();
 //			
-			Tree arbolDelete2 = new Tree(10);
-			arbolDelete2.add(5);
-			arbolDelete2.add(2);
-			arbolDelete2.add(30);
-			arbolDelete2.add(25);
-			arbolDelete2.add(45);
-		
-			System.out.println("imprimir arbolDelete en pre orden: ");
-			arbolDelete2.imprimirAbolPreOrden();
-			System.out.println("Se elimino el elemento? " + arbolDelete2.delete(10, arbolDelete2)+ "\n imprimir arbol resultante ");
-			arbolDelete2.imprimirAbolPreOrden();
+//			Tree arbolDelete2 = new Tree(10);
+//			arbolDelete2.add(5);
+//			arbolDelete2.add(2);
+//			arbolDelete2.add(30);
+//			arbolDelete2.add(25);
+//			arbolDelete2.add(45);
+//		
+//			System.out.println("imprimir arbolDelete en pre orden: ");
+//			arbolDelete2.imprimirAbolPreOrden();
+//			System.out.println("Se elimino el elemento? " + arbolDelete2.delete(10, arbolDelete2)+ "\n imprimir arbol resultante ");
+//			arbolDelete2.imprimirAbolPreOrden();
 
 
 			
@@ -208,6 +208,9 @@ public class main {
 //				System.out.println(j3);
 //			}
 
+			
+	
+			
 	}
 
 
