@@ -361,7 +361,59 @@ public class Tree {
 		return toReturn;
 	}
 	
-
+//	Aca voy a poner metodos de ejercicios que encontre en internet, son mas que nada para practicar
+	
+//	cuenta recursivamente, cuantos nodos hay.
+	public int countNodes() {
+		int cant = 0;
+		cant++;
+		if(this.isEmpty()) {
+			return 0;
+		}
+		if(this.left!=null) {
+			cant+= this.left.countNodes();
+		}
+		if(this.right!=null) {
+			cant+= this.right.countNodes();
+		}
+		
+		return cant;
+	}
+	
+//	cuenta recursivamente, cuantas hojas hay
+	public int countLeaves() {
+		int cant = 0;
+		if(this.left==null && this.right==null) {
+			cant++;
+		}
+		if(this.left!=null) {
+			cant+= this.left.countLeaves();
+		}
+		if(this.right!=null) {
+			cant+= this.right.countLeaves();
+		}
+		return cant;
+	}
+	
+//guardar en una lista dinámica todos los números entre 2 números pasados por parámetro.
+	public ArrayList<Integer> valuesBetweenTwoParameters(int min, int max){
+		ArrayList<Integer>toReturn = new ArrayList<>();
+		
+		if(min>max) {
+			return null;
+		}
+		
+		if(this.value>min && this.value<max) {
+			toReturn.add(this.value);
+		}
+		if(this.left!=null) {
+			toReturn.addAll(this.left.valuesBetweenTwoParameters(min, max));
+		}
+		if(this.right!=null) {
+			toReturn.addAll(this.right.valuesBetweenTwoParameters(min, max));
+		}
+		return toReturn;
+	}
 	
 	
 

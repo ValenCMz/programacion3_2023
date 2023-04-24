@@ -191,23 +191,25 @@ public class main {
 //			
 //			System.out.println(sum.sumNodosInternos());
 //			
-//			//usado para ejercicio 3
-//			Tree ejercicio3 = new Tree(6);
-//			ejercicio3.add(2);
-//			ejercicio3.add(1);
-//			ejercicio3.add(4);
-//			ejercicio3.add(10);
-//			ejercicio3.add(11);
-//			ejercicio3.add(8);
-//			ejercicio3.add(7);
-//			ejercicio3.add(9);
-//			ArrayList<Integer>ej3 = new ArrayList<>();
-//			ej3 = ejercicio3.obtenerHojasMayoresK(8);
-//			
-//			for (Integer j3 : ej3) {
-//				System.out.println(j3);
-//			}
-
+			//usado para ejercicio 3
+			Tree prueba = new Tree(6);
+			prueba.add(2);
+			prueba.add(1);
+			prueba.add(4);
+			prueba.add(10);
+			prueba.add(11);
+			prueba.add(8);
+			prueba.add(7);
+			prueba.add(9);
+			prueba.imprimirAbolPreOrden();
+			ArrayList<Integer>arrayPrueba = new ArrayList<>();
+			arrayPrueba = prueba.valuesBetweenTwoParameters(7, 10);
+			if(arrayPrueba==null) {
+				System.out.println("es null");
+			}
+			for (Integer i : arrayPrueba) {
+				System.out.println(i);
+			}
 			
 	
 			
