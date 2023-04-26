@@ -23,7 +23,7 @@ public class ejercicio5 {
 //		if(esVocal(this.value)) {
 //			contador++;
 //		}
-//		if(contador==nCant) {
+//		if(contador==nCant && (this.left==null && this.right==null)) {
 //			toReturn.add(pn);
 //		}
 //		if(this.left!=null) {
