@@ -2,12 +2,18 @@ package tp3;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map.Entry;
 
 public class GrafoDirigido<T> implements Grafo<T> {
-	private HashMap<Integer, HashMap<Integer,T>> listTheListAdy = new HashMap<>(); 
+	private HashMap<Integer, HashMap<Integer,T>> listTheListAdy; 
+	
+	
+	
+	public GrafoDirigido() {
+		this.listTheListAdy = new HashMap<>();
+	}
+
 	@Override
-	
-	
 	// Agrega un vertice 
 	//agregar un vertice a un grafo, no tiene porque tener conexion entre si aun, solo es agregar un vertice a la estructura de datos grafo
 	public void agregarVertice(int verticeId) {
@@ -30,9 +36,20 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
 	@Override
 	// Agrega un arco con una etiqueta, que conecta el verticeId1 con el verticeId2
-	public void agregarArco(int verticeId1, int verticeId2, T etiqueta) {
-		
+	public void agregarArco(int verticeOrigen, int verticeDestino, T etiqueta) {
+		//accedo al mapInterno del grafo, donde guardo los arcos
+		HashMap<Integer, T> mapInterno = this.listTheListAdy.get(verticeOrigen);
+		if(!mapInterno.containsKey(verticeDestino)) {
+			//creo un arco con el valor de origen y el valor de destino y la etiqueta
+			Arco<T> arcoNew = new Arco<T>(verticeOrigen, verticeDestino, etiqueta);
 
+			//al mapInterno le agrego el arco nuevo como id la referencia de destino
+			mapInterno.put(verticeDestino, (T)arcoNew);
+		}else {
+			System.out.println("Ya existe este arco");
+		}
+		
+		
 	}
 
 	@Override
@@ -98,12 +115,12 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	@Override
 	public String toString() {
 		String toReturn= "";
-		for(Integer i : this.listTheListAdy.keySet()) {
-			System.out.println(i);
-		}
-		
-		
+		//el .entrySet() nos da un consjunto de todas las claves y valores
+		for (Entry<Integer, HashMap<Integer, T>> entry : this.listTheListAdy.entrySet()) {
+			toReturn +=  "\n" + entry.getKey() ;
+			toReturn += "=";
+			toReturn += entry.getValue();			
+        }
 		return toReturn;
 	}
-
 }
