@@ -1,5 +1,7 @@
 package Main;
 
+import java.util.HashMap;
+
 import tp3.GrafoDirigido;
 
 public class mainGrafos {
@@ -15,14 +17,16 @@ public class mainGrafos {
 		grafo.agregarVertice(2);
 		grafo.agregarVertice(3);
 		grafo.agregarVertice(4);
-		System.out.println(grafo);
-		grafo.agregarArco(1, 2, "hola");
-//		grafo.agregarArco(1, 3, 15);
-//		grafo.agregarArco(3, 2, 22);
-//		grafo.agregarArco(3, 4, 30);
 
+		grafo.agregarArco(1, 2,10);
+		grafo.agregarArco(1, 3,15);
+		grafo.agregarArco(3, 2,22);
+		grafo.agregarArco(3, 4,30);
+		grafo.agregarArco(4, 1, 2);
 
-		System.out.println(grafo);
+		HashMap<Integer, Boolean> hash = new HashMap<>();
+		grafo.busquedaEnProfundidad(3,hash );
+
 
 		
 		

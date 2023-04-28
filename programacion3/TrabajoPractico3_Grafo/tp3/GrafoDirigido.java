@@ -1,16 +1,18 @@
 package tp3;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
 public class GrafoDirigido<T> implements Grafo<T> {
 	private HashMap<Integer, HashMap<Integer,T>> listTheListAdy; 
-	
+	private int cantNodos;
 	
 	
 	public GrafoDirigido() {
 		this.listTheListAdy = new HashMap<>();
+		this.cantNodos =0;
 	}
 
 	@Override
@@ -20,8 +22,8 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		//si la clave no existe en la lista la agregamos
 		if(!this.listTheListAdy.containsKey(verticeId)) {
 			this.listTheListAdy.put(verticeId, new HashMap<>());
+			cantNodos++;
 		}
-
 	}
 
 	@Override
@@ -30,8 +32,8 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		// por ahora solo vamos a eliminar el vertice sin conexion
 		if(this.listTheListAdy.containsKey(verticeId)) {
 			this.listTheListAdy.remove(verticeId);
+			//deberia eliminar los arcos entrantes y salientes		
 		}
-
 	}
 
 	@Override
@@ -47,15 +49,19 @@ public class GrafoDirigido<T> implements Grafo<T> {
 			mapInterno.put(verticeDestino, (T)arcoNew);
 		}else {
 			System.out.println("Ya existe este arco");
-		}
-		
-		
+		}	
 	}
 
 	@Override
+	// Borra el arco que conecta el verticeId1 con el verticeId2 
 	public void borrarArco(int verticeId1, int verticeId2) {
-		// TODO Auto-generated method stub
-
+		HashMap<Integer, T>mapInterno = this.listTheListAdy.get(verticeId1);
+		
+		//tendre q recorrer recursivamente?
+			//y ir preguntando si en entre los vertices existe un arco?
+				//si existe debo eliminarlo
+		
+	
 	}
 
 	@Override
@@ -110,6 +116,43 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	public Iterator<Arco<T>> obtenerArcos(int verticeId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	
+
+	//Este metodo es para recorrer en profundidad, recibe el nodo por donde debe empezar a recorrer y un map de los nodos visitados(para que no se genere un ciclo ir guardandolos)
+	public void busquedaEnProfundidad(int nodoInicial, HashMap<Integer,Boolean> visitados) {
+		//si tiene el nodoDonde debo buscar
+		if(this.listTheListAdy.containsKey(nodoInicial)) {
+			//traigo los adyacentes del nodo
+			HashMap<Integer, T> listaDeAdyacencia= this.listTheListAdy.get(nodoInicial);
+			//agrego el nodo como visitado
+			visitados.put(nodoInicial,true);
+		
+			//recorro los nodos adyacentes
+			for (int next : listaDeAdyacencia.keySet()) {
+				//deberia verificar que no existan arcos, si no tiene debo avisar
+				
+				
+				//si el nodo siguiente aun no es visitado voy a delegarle la busqueda
+				if(!visitados.containsKey(next)) {
+				
+					System.out.println("Nodo en el que estoy " + nodoInicial);
+					System.out.println("Nodo siguietente " + next);
+					busquedaEnProfundidad(next, visitados);
+				}
+				
+			}
+			
+		}else {
+			System.out.println("El grafo no contiene: " + nodoInicial);
+
+		}
+	
+	}
+	
+	public int getCantNodos() {
+		return this.cantNodos;
 	}
 	
 	@Override
