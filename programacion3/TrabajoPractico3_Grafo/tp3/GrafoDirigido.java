@@ -7,12 +7,9 @@ import java.util.Map.Entry;
 
 public class GrafoDirigido<T> implements Grafo<T> {
 	private HashMap<Integer, HashMap<Integer,T>> listTheListAdy; 
-	private int cantNodos;
-	
 	
 	public GrafoDirigido() {
 		this.listTheListAdy = new HashMap<>();
-		this.cantNodos =0;
 	}
 
 	@Override
@@ -22,7 +19,6 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		//si la clave no existe en la lista la agregamos
 		if(!this.listTheListAdy.containsKey(verticeId)) {
 			this.listTheListAdy.put(verticeId, new HashMap<>());
-			cantNodos++;
 		}
 	}
 
@@ -32,7 +28,8 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		// por ahora solo vamos a eliminar el vertice sin conexion
 		if(this.listTheListAdy.containsKey(verticeId)) {
 			this.listTheListAdy.remove(verticeId);
-			//deberia eliminar los arcos entrantes y salientes		
+			//deberia eliminar los arcos entrantes y salientes
+			
 		}
 	}
 
@@ -55,31 +52,37 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	@Override
 	// Borra el arco que conecta el verticeId1 con el verticeId2 
 	public void borrarArco(int verticeId1, int verticeId2) {
-		HashMap<Integer, T>mapInterno = this.listTheListAdy.get(verticeId1);
-		
-		//tendre q recorrer recursivamente?
-			//y ir preguntando si en entre los vertices existe un arco?
-				//si existe debo eliminarlo
-		
+		HashMap<Integer, T>ady = this.listTheListAdy.get(verticeId1);
+		if(this.existeArco(verticeId1, verticeId2)) {
+			ady.remove(verticeId2);//debo remover el arco, pero que arco es?
+		}
 	
 	}
 
 	@Override
 	public boolean contieneVertice(int verticeId) {
-		// TODO Auto-generated method stub
-		return false;
+		//deberia resolverlo en forma recursiva o con esto basta? 
+		return this.listTheListAdy.containsKey(verticeId);
 	}
 
 	@Override
 	public boolean existeArco(int verticeId1, int verticeId2) {
-		// TODO Auto-generated method stub
-		return false;
+		HashMap<Integer, T> ady = this.listTheListAdy.get(verticeId1);
+		return ady.containsKey(verticeId2);
 	}
 
 	@Override
 	public Arco<T> obtenerArco(int verticeId1, int verticeId2) {
-		// TODO Auto-generated method stub
-		return null;
+		//debo obtner el arco que conecta los 2 vertices
+		if(this.existeArco(verticeId1, verticeId2)) {
+			
+			
+			
+			return null;
+		}
+		else {
+			return null;
+		}
 	}
 
 	@Override
@@ -120,6 +123,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	
 	
 
+	//Creo q no funciona
 	//Este metodo es para recorrer en profundidad, recibe el nodo por donde debe empezar a recorrer y un map de los nodos visitados(para que no se genere un ciclo ir guardandolos)
 	public void busquedaEnProfundidad(int nodoInicial, HashMap<Integer,Boolean> visitados) {
 		//si tiene el nodoDonde debo buscar
@@ -139,7 +143,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 				
 					System.out.println("Nodo en el que estoy " + nodoInicial);
 					System.out.println("Nodo siguietente " + next);
-					busquedaEnProfundidad(next, visitados);
+					this.busquedaEnProfundidad(next, visitados);
 				}
 				
 			}
@@ -149,10 +153,6 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
 		}
 	
-	}
-	
-	public int getCantNodos() {
-		return this.cantNodos;
 	}
 	
 	@Override

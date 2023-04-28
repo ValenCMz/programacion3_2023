@@ -13,20 +13,31 @@ public class mainGrafos {
 	public static void main(String[]args) {
 		//lo hago de tipo object para poder crear grafos ponderados o etiquetados
 		GrafoDirigido<Object> grafo = new GrafoDirigido<>();
-		grafo.agregarVertice(1);
+		grafo.agregarVertice(5);
+		grafo.agregarVertice(11);
 		grafo.agregarVertice(2);
+		grafo.agregarVertice(7);
+		grafo.agregarVertice(8);
+		grafo.agregarVertice(9);
 		grafo.agregarVertice(3);
-		grafo.agregarVertice(4);
+		grafo.agregarVertice(10);
 
-		grafo.agregarArco(1, 2,10);
-		grafo.agregarArco(1, 3,15);
-		grafo.agregarArco(3, 2,22);
-		grafo.agregarArco(3, 4,30);
-		grafo.agregarArco(4, 1, 2);
-
+		grafo.agregarArco(5, 11, "");
+		grafo.agregarArco(11, 2, "");
+		grafo.agregarArco(7, 11, "");
+		grafo.agregarArco(7, 8, "");
+		grafo.agregarArco(11,9, "");
+		grafo.agregarArco(11, 10, "");
+		grafo.agregarArco(8, 9, "");
+		grafo.agregarArco(3, 8, "");
+		grafo.agregarArco(3, 10, "");
+		
 		HashMap<Integer, Boolean> hash = new HashMap<>();
-		grafo.busquedaEnProfundidad(3,hash );
-
+		grafo.busquedaEnProfundidad(5,hash);
+		
+		System.out.println(grafo);
+		grafo.borrarArco(11, 10);
+		System.out.println(grafo);
 
 		
 		
