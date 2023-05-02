@@ -3,13 +3,20 @@ package tp3;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map.Entry;
+import java.util.Queue;
 
 public class GrafoDirigido<T> implements Grafo<T> {
 	private HashMap<Integer, HashMap<Integer,T>> listTheListAdy; 
+	private HashMap<Integer, Boolean> visitados;
+	private Queue<Integer>cola;
+	
 	
 	public GrafoDirigido() {
 		this.listTheListAdy = new HashMap<>();
+		this.visitados = new HashMap<>();
+		this.cola = new LinkedList<>();
 	}
 
 	@Override
@@ -154,6 +161,44 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		listColors.remove(nodoInicial);
 		listColors.put(nodoInicial, "NEGRO");
 	}
+	
+	public void BFS(GrafoDirigido<T>grafo) {
+		//vacio la fila
+		this.cola.clear();
+		System.out.println(cola);
+		//marco todos los vertices como no visitados
+		for (int v : grafo.listTheListAdy.keySet()) {
+			this.visitados.put(v, false);
+		}
+		System.out.println(visitados);
+		for(int v : grafo.listTheListAdy.keySet()) {
+			Boolean i = this.visitados.get(v);
+			if(i==false) {
+				BFS(grafo,v);
+			}
+		}
+		
+	}
+	
+	public void BFS(GrafoDirigido<T>grafo, int vertice) {
+		this.visitados.remove(vertice);
+		this.visitados.put(vertice, true);
+		this.cola.add(vertice);
+		System.out.println(cola);
+		System.out.println(visitados);
+		while(!this.cola.isEmpty()) {
+			Integer x = this.cola.poll();
+			HashMap<Integer, T> ady = this.listTheListAdy.get(x);
+			for(int y : ady.keySet()) {
+				if(!this.visitados.containsKey(y)) {
+					this.visitados.put(y,true);
+					this.cola.add(y);
+				}
+			}
+		}
+	}
+	
+	
 	
 	@Override
 	public String toString() {

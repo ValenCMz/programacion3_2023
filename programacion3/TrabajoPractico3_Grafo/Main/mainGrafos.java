@@ -33,9 +33,9 @@ public class mainGrafos {
 		grafo.agregarArco(3, 10, "");
 		
 		HashMap<Integer, Boolean> hash = new HashMap<>();
-		grafo.DFS(grafo);
+		grafo.BFS(grafo);
 		
-		System.out.println(grafo);
+//		System.out.println(grafo);
 //		grafo.borrarArco(11, 10);
 //		System.out.println(grafo);
 
