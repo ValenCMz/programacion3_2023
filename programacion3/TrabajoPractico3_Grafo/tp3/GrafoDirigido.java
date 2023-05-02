@@ -54,7 +54,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	public void borrarArco(int verticeId1, int verticeId2) {
 		HashMap<Integer, T>ady = this.listTheListAdy.get(verticeId1);
 		if(this.existeArco(verticeId1, verticeId2)) {
-			ady.remove(verticeId2);//debo remover el arco, pero que arco es?
+			ady.remove(verticeId2);
 		}
 	
 	}
@@ -122,37 +122,37 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	}
 	
 	
-
-	//Creo q no funciona
-	//Este metodo es para recorrer en profundidad, recibe el nodo por donde debe empezar a recorrer y un map de los nodos visitados(para que no se genere un ciclo ir guardandolos)
-	public void busquedaEnProfundidad(int nodoInicial, HashMap<Integer,Boolean> visitados) {
-		//si tiene el nodoDonde debo buscar
-		if(this.listTheListAdy.containsKey(nodoInicial)) {
-			//traigo los adyacentes del nodo
-			HashMap<Integer, T> listaDeAdyacencia= this.listTheListAdy.get(nodoInicial);
-			//agrego el nodo como visitado
-			visitados.put(nodoInicial,true);
+	//No se como agregar el tiempo al algoritmo
+	public void DFS(GrafoDirigido<T> grafo) {
+		//Creo la lista donde voy a guardar el color
+		HashMap<Integer, String> listColors = new HashMap<>();
 		
-			//recorro los nodos adyacentes
-			for (int next : listaDeAdyacencia.keySet()) {
-				//deberia verificar que no existan arcos, si no tiene debo avisar
-				
-				
-				//si el nodo siguiente aun no es visitado voy a delegarle la busqueda
-				if(!visitados.containsKey(next)) {
-				
-					System.out.println("Nodo en el que estoy " + nodoInicial);
-					System.out.println("Nodo siguietente " + next);
-					this.busquedaEnProfundidad(next, visitados);
-				}
-				
-			}
-			
-		}else {
-			System.out.println("El grafo no contiene: " + nodoInicial);
-
+		//pongo blanco a cada uno de los vertices
+		for (int v : grafo.listTheListAdy.keySet()) {
+			listColors.put(v, "BLANCO");
 		}
+		
+		for (int v : grafo.listTheListAdy.keySet()) {
+			String color = listColors.get(v);
+			if(color=="BLANCO") {
+				this.DFS_Visit(v, listColors);
+			}
+		}
+	}
 	
+	//No se como agregar el tiempo al algoritmo
+	public void DFS_Visit(int nodoInicial, HashMap<Integer, String>listColors) {
+		listColors.remove(nodoInicial);
+		listColors.put(nodoInicial, "AMARILLO");
+		HashMap<Integer, T> listAdy = this.listTheListAdy.get(nodoInicial);
+		for(int v : listAdy.keySet()) {
+			String color = listColors.get(v);
+			if(color=="BLANCO") {
+				DFS_Visit(v, listColors);
+			}
+		}
+		listColors.remove(nodoInicial);
+		listColors.put(nodoInicial, "NEGRO");
 	}
 	
 	@Override

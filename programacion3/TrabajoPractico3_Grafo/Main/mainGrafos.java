@@ -33,11 +33,11 @@ public class mainGrafos {
 		grafo.agregarArco(3, 10, "");
 		
 		HashMap<Integer, Boolean> hash = new HashMap<>();
-		grafo.busquedaEnProfundidad(5,hash);
+		grafo.DFS(grafo);
 		
 		System.out.println(grafo);
-		grafo.borrarArco(11, 10);
-		System.out.println(grafo);
+//		grafo.borrarArco(11, 10);
+//		System.out.println(grafo);
 
 		
 		
