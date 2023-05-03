@@ -9,12 +9,14 @@ import java.util.Queue;
 
 public class GrafoDirigido<T> implements Grafo<T> {
 	private HashMap<Integer, HashMap<Integer,T>> listTheListAdy; 
+	private HashMap<Integer,String>listColors;
 	private HashMap<Integer, Boolean> visitados;
 	private Queue<Integer>cola;
 	
 	
 	public GrafoDirigido() {
 		this.listTheListAdy = new HashMap<>();
+		this.listColors = new HashMap<>();
 		this.visitados = new HashMap<>();
 		this.cola = new LinkedList<>();
 	}
@@ -130,62 +132,61 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	
 	
 	//No se como agregar el tiempo al algoritmo
-	public void DFS(GrafoDirigido<T> grafo) {
-		//Creo la lista donde voy a guardar el color
-		HashMap<Integer, String> listColors = new HashMap<>();
+	public void DFS() {
 		
 		//pongo blanco a cada uno de los vertices
-		for (int v : grafo.listTheListAdy.keySet()) {
-			listColors.put(v, "BLANCO");
+		for (int v : this.listTheListAdy.keySet()) {
+			this.listColors.put(v, "BLANCO");
 		}
 		
-		for (int v : grafo.listTheListAdy.keySet()) {
-			String color = listColors.get(v);
+		for (int v : this.listTheListAdy.keySet()) {
+			String color = this.listColors.get(v);
 			if(color=="BLANCO") {
-				this.DFS_Visit(v, listColors);
+				this.DFS_Visit(v);
 			}
 		}
 	}
 	
 	//No se como agregar el tiempo al algoritmo
-	public void DFS_Visit(int nodoInicial, HashMap<Integer, String>listColors) {
-		listColors.remove(nodoInicial);
-		listColors.put(nodoInicial, "AMARILLO");
+	public void DFS_Visit(int nodoInicial) {
+		this.listColors.remove(nodoInicial);
+		this.listColors.put(nodoInicial, "AMARILLO");
 		HashMap<Integer, T> listAdy = this.listTheListAdy.get(nodoInicial);
 		for(int v : listAdy.keySet()) {
-			String color = listColors.get(v);
+			String color = this.listColors.get(v);
 			if(color=="BLANCO") {
-				DFS_Visit(v, listColors);
+				DFS_Visit(v);
 			}
 		}
-		listColors.remove(nodoInicial);
-		listColors.put(nodoInicial, "NEGRO");
+		this.listColors.remove(nodoInicial);
+		this.listColors.put(nodoInicial, "NEGRO");
 	}
 	
-	public void BFS(GrafoDirigido<T>grafo) {
+	
+	
+	public void BFS() {
 		//vacio la fila
 		this.cola.clear();
-		System.out.println(cola);
+
 		//marco todos los vertices como no visitados
-		for (int v : grafo.listTheListAdy.keySet()) {
+		for (int v : this.listTheListAdy.keySet()) {
 			this.visitados.put(v, false);
 		}
-		System.out.println(visitados);
-		for(int v : grafo.listTheListAdy.keySet()) {
+		for(int v : this.listTheListAdy.keySet()) {
 			Boolean i = this.visitados.get(v);
 			if(i==false) {
-				BFS(grafo,v);
+				BFS(v);
 			}
 		}
+	
 		
 	}
 	
-	public void BFS(GrafoDirigido<T>grafo, int vertice) {
+	public void BFS( int vertice) {
+		
 		this.visitados.remove(vertice);
 		this.visitados.put(vertice, true);
 		this.cola.add(vertice);
-		System.out.println(cola);
-		System.out.println(visitados);
 		while(!this.cola.isEmpty()) {
 			Integer x = this.cola.poll();
 			HashMap<Integer, T> ady = this.listTheListAdy.get(x);
