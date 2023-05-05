@@ -2,6 +2,7 @@ package tp3;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 public class ServicioDFS {
@@ -10,42 +11,57 @@ public class ServicioDFS {
 	private Grafo<?> grafo;
 
 	public ServicioDFS(Grafo<?> grafo) {
+		this.listColors = new HashMap<>();
 		this.grafo = grafo;
 	}
 	
 	public List<Integer> dfsForest() {
 		// Resolver DFS
-		return new ArrayList<>();
-	}
-	
-	//No se como agregar el tiempo al algoritmo
-		public void DFS() {
-			//pongo blanco a cada uno de los vertices
-			for (int v : grafo.listTheListAdy.keySet()) {
-				this.listColors.put(v, "BLANCO");
+		ArrayList<Integer> toReturn = new ArrayList<>();
+		Iterator<Integer> iterator = grafo.obtenerVertices();
+		while(iterator.hasNext()) {
+			this.listColors.put(iterator.next(), "BLANCO");
+		}
+		
+		while(iterator.hasNext()) {
+			String color = this.listColors.get(iterator.next());
+			if(color.equals("BLANCO")) {
+				this.DFS_Visit(iterator.next());
 			}
 			
-			for (int v : this.listTheListAdy.keySet()) {
-				String color = this.listColors.get(v);
-				if(color=="BLANCO") {
-					this.DFS_Visit(v);
-				}
+		}
+		
+//		boolean todoNegro = true;
+//		for(int i : this.listColors.keySet()) {
+//			String color = this.listColors.get(i);
+//			if(!color.equals("NEGRO")) {
+//				todoNegro = false;
+//			}
+//		}
+//		
+//		if(todoNegro) {
+//			for(int i: this.listColors.keySet()) {
+//				toReturn.add(i);
+//			}
+//		}
+//		
+		return toReturn;
+}
+	
+	
+	private void DFS_Visit(int nodoInicial) {
+		//Coloco el nodo en amarillo
+		this.listColors.put(nodoInicial, "AMARILLO");
+
+		Iterator<Integer> ady = grafo.obtenerAdyacentes(nodoInicial);
+		
+		while(ady.hasNext()) {
+			String color = this.listColors.get(nodoInicial);
+			if(color.equals("BLANCO")) {
+				DFS_Visit(ady.next());
 			}
 		}
 		
-		//No se como agregar el tiempo al algoritmo
-		public void DFS_Visit(int nodoInicial) {
-			this.listColors.remove(nodoInicial);
-			this.listColors.put(nodoInicial, "AMARILLO");
-			HashMap<Integer, T> listAdy = this.listTheListAdy.get(nodoInicial);
-			for(int v : listAdy.keySet()) {
-				String color = this.listColors.get(v);
-				if(color=="BLANCO") {
-					DFS_Visit(v);
-				}
-			}
-			this.listColors.remove(nodoInicial);
-			this.listColors.put(nodoInicial, "NEGRO");
-		}
-
+		this.listColors.put(nodoInicial, "NEGRO");
+	}
 }

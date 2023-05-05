@@ -81,17 +81,16 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	public Arco<T> obtenerArco(int verticeId1, int verticeId2) {
 		if(this.existeArco(verticeId1, verticeId2)) {
 			Arco<T> toReturn = null;
-			for(int v : this.listTheListAdy.keySet()) {
-				HashMap<Integer, T> ady = this.listTheListAdy.get(v);
-				if(ady.containsKey(verticeId2)) {
-					toReturn = new Arco<>(verticeId1,verticeId2, ady.get(verticeId2));
-				}
-			}
+			
+			HashMap<Integer,T>aux = this.listTheListAdy.get(verticeId1);
+		
+			toReturn = new Arco<>(verticeId1,verticeId2, aux.get(verticeId2));
+			
 			return toReturn;
-		}else {
-			return null;
 		}
+		return null;		
 	}
+	
 	
 	@Override
 	public int cantidadVertices() {
@@ -100,20 +99,26 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
 	@Override
 	public int cantidadArcos() {
-		// TODO Auto-generated emethod stub
-		return 0;
+		int cont = 0;
+		HashMap<Integer, T> aux = new HashMap<>();
+		for(int v : this.listTheListAdy.keySet()) {
+			HashMap<Integer, T> ady = this.listTheListAdy.get(v);
+			for(int a : ady.keySet()) {
+				cont++;
+			}
+		}
+		return cont;
 	}
 
 	@Override
 	public Iterator<Integer> obtenerVertices() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.listTheListAdy.keySet().iterator();
 	}
 
 	@Override
 	public Iterator<Integer> obtenerAdyacentes(int verticeId) {
-		// TODO Auto-generated method stub
-		return null;
+		HashMap<Integer,T>toReturn =  this.listTheListAdy.get(verticeId);
+		return toReturn.keySet().iterator();
 	}
 
 	@Override

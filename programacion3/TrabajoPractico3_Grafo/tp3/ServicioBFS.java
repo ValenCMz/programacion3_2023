@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Queue;
 
 
-public class ServiciosBFS {
+public class ServicioBFS {
 	private HashMap<Integer, Boolean> visitados;
 	private Queue<Integer>cola;
 	
