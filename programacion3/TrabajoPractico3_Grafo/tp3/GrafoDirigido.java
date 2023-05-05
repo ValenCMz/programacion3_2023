@@ -9,16 +9,9 @@ import java.util.Queue;
 
 public class GrafoDirigido<T> implements Grafo<T> {
 	private HashMap<Integer, HashMap<Integer,T>> listTheListAdy; 
-	private HashMap<Integer,String>listColors;
-	private HashMap<Integer, Boolean> visitados;
-	private Queue<Integer>cola;
-	
 	
 	public GrafoDirigido() {
 		this.listTheListAdy = new HashMap<>();
-		this.listColors = new HashMap<>();
-		this.visitados = new HashMap<>();
-		this.cola = new LinkedList<>();
 	}
 
 	@Override
@@ -36,9 +29,15 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	public void borrarVertice(int verticeId) {
 		// por ahora solo vamos a eliminar el vertice sin conexion
 		if(this.listTheListAdy.containsKey(verticeId)) {
-			this.listTheListAdy.remove(verticeId);
-			//deberia eliminar los arcos entrantes y salientes
+			//debo chequear en los demas vertices no tengan en su lista de ady el vertice si lo tienen debo eliminar el arco
+			for(int v : this.listTheListAdy.keySet()) {
+				HashMap<Integer, T> ady = this.listTheListAdy.get(v);
+				if(ady.containsKey(verticeId)) {
+					borrarArco(v, verticeId);
+				}
+			}
 			
+			this.listTheListAdy.remove(verticeId);			
 		}
 	}
 
@@ -65,12 +64,10 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		if(this.existeArco(verticeId1, verticeId2)) {
 			ady.remove(verticeId2);
 		}
-	
 	}
 
 	@Override
 	public boolean contieneVertice(int verticeId) {
-		//deberia resolverlo en forma recursiva o con esto basta? 
 		return this.listTheListAdy.containsKey(verticeId);
 	}
 
@@ -82,27 +79,28 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
 	@Override
 	public Arco<T> obtenerArco(int verticeId1, int verticeId2) {
-		//debo obtner el arco que conecta los 2 vertices
 		if(this.existeArco(verticeId1, verticeId2)) {
-			
-			
-			
-			return null;
-		}
-		else {
+			Arco<T> toReturn = null;
+			for(int v : this.listTheListAdy.keySet()) {
+				HashMap<Integer, T> ady = this.listTheListAdy.get(v);
+				if(ady.containsKey(verticeId2)) {
+					toReturn = new Arco<>(verticeId1,verticeId2, ady.get(verticeId2));
+				}
+			}
+			return toReturn;
+		}else {
 			return null;
 		}
 	}
-
+	
 	@Override
 	public int cantidadVertices() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.listTheListAdy.size();
 	}
 
 	@Override
 	public int cantidadArcos() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated emethod stub
 		return 0;
 	}
 
@@ -129,77 +127,6 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	//No se como agregar el tiempo al algoritmo
-	public void DFS() {
-		
-		//pongo blanco a cada uno de los vertices
-		for (int v : this.listTheListAdy.keySet()) {
-			this.listColors.put(v, "BLANCO");
-		}
-		
-		for (int v : this.listTheListAdy.keySet()) {
-			String color = this.listColors.get(v);
-			if(color=="BLANCO") {
-				this.DFS_Visit(v);
-			}
-		}
-	}
-	
-	//No se como agregar el tiempo al algoritmo
-	public void DFS_Visit(int nodoInicial) {
-		this.listColors.remove(nodoInicial);
-		this.listColors.put(nodoInicial, "AMARILLO");
-		HashMap<Integer, T> listAdy = this.listTheListAdy.get(nodoInicial);
-		for(int v : listAdy.keySet()) {
-			String color = this.listColors.get(v);
-			if(color=="BLANCO") {
-				DFS_Visit(v);
-			}
-		}
-		this.listColors.remove(nodoInicial);
-		this.listColors.put(nodoInicial, "NEGRO");
-	}
-	
-	
-	
-	public void BFS() {
-		//vacio la fila
-		this.cola.clear();
-
-		//marco todos los vertices como no visitados
-		for (int v : this.listTheListAdy.keySet()) {
-			this.visitados.put(v, false);
-		}
-		for(int v : this.listTheListAdy.keySet()) {
-			Boolean i = this.visitados.get(v);
-			if(i==false) {
-				BFS(v);
-			}
-		}
-	
-		
-	}
-	
-	public void BFS( int vertice) {
-		
-		this.visitados.remove(vertice);
-		this.visitados.put(vertice, true);
-		this.cola.add(vertice);
-		while(!this.cola.isEmpty()) {
-			Integer x = this.cola.poll();
-			HashMap<Integer, T> ady = this.listTheListAdy.get(x);
-			for(int y : ady.keySet()) {
-				if(!this.visitados.containsKey(y)) {
-					this.visitados.put(y,true);
-					this.cola.add(y);
-				}
-			}
-		}
-	}
-	
-	
 	
 	@Override
 	public String toString() {
