@@ -6,6 +6,7 @@ import java.util.List;
 
 import tp3.Arco;
 import tp3.GrafoDirigido;
+import tp3.ServicioBFS;
 import tp3.ServicioDFS;
 
 public class mainGrafos {
@@ -53,6 +54,11 @@ public class mainGrafos {
 		ServicioDFS dfs = new ServicioDFS(grafo);
 		List<Integer>aux = dfs.dfsForest();
 		System.out.println(aux);
+		
+		ServicioBFS bfs = new ServicioBFS(grafo);
+		List<Integer>auxBfs = bfs.bfsForest();
+		System.out.println(auxBfs);
+		
 //		System.out.println(grafo);
 //		grafo.borrarArco(11, 10);
 //		System.out.println(grafo);
