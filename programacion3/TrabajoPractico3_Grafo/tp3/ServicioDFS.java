@@ -19,32 +19,20 @@ public class ServicioDFS {
 		// Resolver DFS
 		ArrayList<Integer> toReturn = new ArrayList<>();
 		Iterator<Integer> iterator = grafo.obtenerVertices();
+		Iterator<Integer> iterator2 = grafo.obtenerVertices();
 		while(iterator.hasNext()) {
 			this.listColors.put(iterator.next(), "BLANCO");
 		}
 		
-		while(iterator.hasNext()) {
-			String color = this.listColors.get(iterator.next());
+		while(iterator2.hasNext()) {
+			int vertice = iterator2.next();
+			String color = this.listColors.get(vertice);
 			if(color.equals("BLANCO")) {
-				this.DFS_Visit(iterator.next());
+				this.DFS_Visit(vertice);
 			}
-			
+			toReturn.add(vertice);
 		}
-		
-//		boolean todoNegro = true;
-//		for(int i : this.listColors.keySet()) {
-//			String color = this.listColors.get(i);
-//			if(!color.equals("NEGRO")) {
-//				todoNegro = false;
-//			}
-//		}
-//		
-//		if(todoNegro) {
-//			for(int i: this.listColors.keySet()) {
-//				toReturn.add(i);
-//			}
-//		}
-//		
+	
 		return toReturn;
 }
 	
@@ -54,11 +42,12 @@ public class ServicioDFS {
 		this.listColors.put(nodoInicial, "AMARILLO");
 
 		Iterator<Integer> ady = grafo.obtenerAdyacentes(nodoInicial);
-		
+	
 		while(ady.hasNext()) {
-			String color = this.listColors.get(nodoInicial);
+			int adyacente = ady.next();
+			String color = this.listColors.get(adyacente);
 			if(color.equals("BLANCO")) {
-				DFS_Visit(ady.next());
+				DFS_Visit(adyacente);
 			}
 		}
 		

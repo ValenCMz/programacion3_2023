@@ -1,6 +1,8 @@
 package Main;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import tp3.Arco;
 import tp3.GrafoDirigido;
@@ -49,7 +51,8 @@ public class mainGrafos {
 		HashMap<Integer, Boolean> hash = new HashMap<>();
 		System.out.println(grafo);
 		ServicioDFS dfs = new ServicioDFS(grafo);
-		System.out.println(dfs.dfsForest());
+		List<Integer>aux = dfs.dfsForest();
+		System.out.println(aux);
 //		System.out.println(grafo);
 //		grafo.borrarArco(11, 10);
 //		System.out.println(grafo);
