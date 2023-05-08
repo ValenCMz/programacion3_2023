@@ -14,24 +14,29 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		this.listTheListAdy = new HashMap<>();
 	}
 
-	@Override
-	// Agrega un vertice 
-	//agregar un vertice a un grafo, no tiene porque tener conexion entre si aun, solo es agregar un vertice a la estructura de datos grafo
+	@Override //a chequear
+	/**
+	* Complejidad: O(1) donde 1 es el tamaño de entrada debido a que debe
+	* "agregar un par clave-valor en el mapa".
+	*/
 	public void agregarVertice(int verticeId) {
-		//si la clave no existe en la lista la agregamos
-		if(!this.listTheListAdy.containsKey(verticeId)) {
-			this.listTheListAdy.put(verticeId, new HashMap<>());
-		}
+		//O(1)
+		this.listTheListAdy.put(verticeId, new HashMap<>());
 	}
 
+	/**
+	* Complejidad: O(1) donde 1 es el tamaño de entrada debido a que debe
+	* "agregar un par clave-valor en el mapa".
+	*/
 	@Override
-	//si borramos el vertice debemos borrar las aristas (arcos) entrantes y salientes
 	public void borrarVertice(int verticeId) {
-		// por ahora solo vamos a eliminar el vertice sin conexion
+		//O(1)
 		if(this.listTheListAdy.containsKey(verticeId)) {
-			//debo chequear en los demas vertices no tengan en su lista de ady el vertice si lo tienen debo eliminar el arco
+			//O(n) + O(n)
 			for(int v : this.listTheListAdy.keySet()) {
+				//O(1)
 				HashMap<Integer, T> ady = this.listTheListAdy.get(v);
+				//O(1)
 				if(ady.containsKey(verticeId)) {
 					borrarArco(v, verticeId);
 				}
@@ -58,10 +63,16 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	}
 
 	@Override
-	// Borra el arco que conecta el verticeId1 con el verticeId2 
+	/**
+	* Complejidad: O(1) donde 1 es el tamaño de entrada debido a que debe
+	* "borrar el arco existente".
+	*/
 	public void borrarArco(int verticeId1, int verticeId2) {
+		//O(1)
 		HashMap<Integer, T>ady = this.listTheListAdy.get(verticeId1);
+		//O(1)
 		if(this.existeArco(verticeId1, verticeId2)) {
+			//O(1)
 			ady.remove(verticeId2);
 		}
 	}
@@ -72,8 +83,14 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	}
 
 	@Override
+	/**
+	* Complejidad: O(1) donde 1 es el tamaño de entrada debido a que debe
+	* "verificar que exista la clave".
+	*/
 	public boolean existeArco(int verticeId1, int verticeId2) {
+		//O(1)
 		HashMap<Integer, T> ady = this.listTheListAdy.get(verticeId1);
+		//O(1)
 		return ady.containsKey(verticeId2);
 	}
 

@@ -7,6 +7,7 @@ import java.util.List;
 import tp3.Arco;
 import tp3.GrafoDirigido;
 import tp3.ServicioBFS;
+import tp3.ServicioCaminos;
 import tp3.ServicioDFS;
 
 public class mainGrafos {
@@ -42,11 +43,17 @@ public class mainGrafos {
 		grafo.agregarVertice(7);
 		grafo.agregarVertice(10);
 		grafo.agregarVertice(9);
+		grafo.agregarVertice(6);
+
+
 		
 		grafo.agregarArco(3, 8, "");
 		grafo.agregarArco(3, 10, "");
 		grafo.agregarArco(8,9, "");
 		grafo.agregarArco(7,8, "");
+		grafo.agregarArco(3,6, "");
+		grafo.agregarArco(6,9, "");
+
 
 		
 		HashMap<Integer, Boolean> hash = new HashMap<>();
@@ -59,6 +66,9 @@ public class mainGrafos {
 		List<Integer>auxBfs = bfs.bfsForest();
 		System.out.println(auxBfs);
 		
+		ServicioCaminos sc = new ServicioCaminos(grafo, 3, 9, 4);
+		List<List<Integer>> auxSc = sc.caminos();
+		System.out.println(auxSc);
 //		System.out.println(grafo);
 //		grafo.borrarArco(11, 10);
 //		System.out.println(grafo);
