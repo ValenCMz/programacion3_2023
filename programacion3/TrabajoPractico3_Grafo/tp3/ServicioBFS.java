@@ -9,35 +9,34 @@ import java.util.Queue;
 
 
 public class ServicioBFS {
-	private HashMap<Integer, Boolean> visitados;
-	private Queue<Integer>cola;
 	
 	private Grafo<?> grafo;
 	
 	public ServicioBFS(Grafo<?> grafo) {
 		this.grafo = grafo;
-		this.visitados = new HashMap<>();
-		this.cola = new LinkedList<>();
 	}
 	
 	public List<Integer> bfsForest() {
+		
+		HashMap<Integer, Boolean> visitados = new HashMap<>();
+		Queue<Integer>cola = new LinkedList<Integer>();
 		ArrayList<Integer>toReturn = new ArrayList<>();
 		//vacio la fila
-		this.cola.clear();
+		cola.clear();
 
 		Iterator<Integer> iterador = grafo.obtenerVertices();
 		Iterator<Integer> iterador2 = grafo.obtenerVertices();
 		
 		//marco todos los vertices como no visitados
 		while(iterador.hasNext()){
-			this.visitados.put(iterador.next(), false);
+			visitados.put(iterador.next(), false);
 		}
 		
 		while(iterador2.hasNext()) {
 			int vertice = iterador2.next();
-			Boolean i = this.visitados.get(vertice);
+			Boolean i = visitados.get(vertice);
 			if(i.equals(false)) {
-				BFS(vertice);
+				BFS(vertice, visitados, cola);
 			}
 			toReturn.add(vertice);
 		}
@@ -45,19 +44,19 @@ public class ServicioBFS {
 		return toReturn;
 	}
 
-	private void BFS(int vertice) {
-		this.visitados.put(vertice, true);
+	private void BFS(int vertice, HashMap<Integer,Boolean>visitados, Queue<Integer>cola) {
+		visitados.put(vertice, true);
 		
-		this.cola.add(vertice);
+		cola.add(vertice);
 		
-		while(!this.cola.isEmpty()) {
-			this.cola.poll();
+		while(!cola.isEmpty()) {
+			cola.poll();
 			Iterator<Integer>adyacentes = grafo.obtenerAdyacentes(vertice);
 			while(adyacentes.hasNext()) {
 				int ady = adyacentes.next();
-				if(!this.visitados.containsKey(ady)) {
-					this.visitados.put(ady,true);
-					this.cola.add(ady);
+				if(!visitados.containsKey(ady)) {
+					visitados.put(ady,true);
+					cola.add(ady);
 				}
 			}
 		}
