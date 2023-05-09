@@ -38,21 +38,27 @@ public class mainGrafos {
 //		grafo.agregarArco(3, 8, "");
 //		grafo.agregarArco(3, 10, "");
 		
+		grafo.agregarVertice(1);
+		grafo.agregarVertice(0);
+		grafo.agregarVertice(2);
 		grafo.agregarVertice(3);
-		grafo.agregarVertice(8);
-		grafo.agregarVertice(7);
-		grafo.agregarVertice(10);
-		grafo.agregarVertice(9);
+		grafo.agregarVertice(5);
+		grafo.agregarVertice(4);
 		grafo.agregarVertice(6);
 
 
 		
-		grafo.agregarArco(3, 8, "");
-		grafo.agregarArco(3, 10, "");
-		grafo.agregarArco(8,9, "");
-		grafo.agregarArco(7,8, "");
-		grafo.agregarArco(3,6, "");
-		grafo.agregarArco(6,9, "");
+		grafo.agregarArco(0, 1, 3);
+		grafo.agregarArco(1, 4, 7);
+		grafo.agregarArco(4, 6, 5);
+		grafo.agregarArco(0, 3, 2);
+		grafo.agregarArco(0, 2, 8);
+		grafo.agregarArco(1, 3, 5);
+		grafo.agregarArco(3, 2, 4);
+		grafo.agregarArco(2,5, 6);
+		grafo.agregarArco(5,6, 2);
+		grafo.agregarArco(3,5, 12);
+		grafo.agregarArco(3,4, 5);
 
 
 		
@@ -66,9 +72,9 @@ public class mainGrafos {
 		List<Integer>auxBfs = bfs.bfsForest();
 		System.out.println(auxBfs);
 		
-		ServicioCaminos sc = new ServicioCaminos(grafo, 3, 9, 4);
+		ServicioCaminos sc = new ServicioCaminos(grafo, 0, 6, 2);
 		List<List<Integer>> auxSc = sc.caminos();
-		System.out.println(auxSc);
+		System.out.println( auxSc );
 //		System.out.println(grafo);
 //		grafo.borrarArco(11, 10);
 //		System.out.println(grafo);
