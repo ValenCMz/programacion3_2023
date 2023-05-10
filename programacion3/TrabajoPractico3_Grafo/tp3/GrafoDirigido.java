@@ -17,31 +17,37 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	@Override //a chequear
 	/**
 	* Complejidad: O(1) donde 1 es el tamaño de entrada debido a que debe
-	* "agregar un par clave-valor en el mapa".
+	* "agregar un par clave-valor en el mapa", si el grafo ya contiene el vertice de todas formas
+	* va a ser O(1) ya que chequea si lo contiene o no y el costo es O(1) y no inserta.
 	*/
 	public void agregarVertice(int verticeId) {
 		//O(1)
-		this.listTheListAdy.put(verticeId, new HashMap<>());
+		if(!this.listTheListAdy.containsKey(verticeId)) {
+			this.listTheListAdy.put(verticeId, new HashMap<>());
+		}else {
+			System.out.println("El grafo ya contiene el " +verticeId);
+		}
 	}
 
 	/**
-	* Complejidad: O(1) donde 1 es el tamaño de entrada debido a que debe
-	* "agregar un par clave-valor en el mapa".
+	* Complejidad: O(n) donde n es el tamaño de entradas de la listTheListAdy debido a que debe
+	* "recorrer los vertices para borrar las entradas entrantes al vertice".
 	*/
 	@Override
 	public void borrarVertice(int verticeId) {
 		//O(1)
 		if(this.listTheListAdy.containsKey(verticeId)) {
-			//O(n) + O(n)
+			//O(n)
 			for(int v : this.listTheListAdy.keySet()) {
 				//O(1)
 				HashMap<Integer, T> ady = this.listTheListAdy.get(v);
 				//O(1)
 				if(ady.containsKey(verticeId)) {
+					//O(1)
 					borrarArco(v, verticeId);
 				}
 			}
-			
+			//O(1)
 			this.listTheListAdy.remove(verticeId);			
 		}
 	}
@@ -65,7 +71,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	@Override
 	/**
 	* Complejidad: O(1) donde 1 es el tamaño de entrada debido a que debe
-	* "borrar el arco existente".
+	* "borrar el arco existente y existe arco tambien es O(1)".
 	*/
 	public void borrarArco(int verticeId1, int verticeId2) {
 		//O(1)
@@ -139,6 +145,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	}
 
 	@Override
+	// Obtiene un iterador que me permite recorrer todos los arcos del grafo
 	public Iterator<Arco<T>> obtenerArcos() {
 		// TODO Auto-generated method stub
 		return null;
