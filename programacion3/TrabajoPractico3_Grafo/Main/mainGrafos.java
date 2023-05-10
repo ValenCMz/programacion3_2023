@@ -75,6 +75,12 @@ public class mainGrafos {
 		
 		HashMap<Integer, Boolean> hash = new HashMap<>();
 		System.out.println(grafo);
+		Arco<Object>arco = grafo.obtenerArco(3, 6);
+		System.out.println(arco);
+		System.out.println(grafo.cantidadArcos());
+		grafo.obtenerArcos();
+		
+		
 		ServicioDFS dfs = new ServicioDFS(grafo);
 		List<Integer>aux = dfs.dfsForest();
 		System.out.println(aux);

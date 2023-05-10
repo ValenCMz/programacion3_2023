@@ -36,15 +36,15 @@ public class ServicioBFS {
 			int vertice = iterador2.next();
 			Boolean i = visitados.get(vertice);
 			if(i.equals(false)) {
-				BFS(vertice, visitados, cola);
+				toReturn.addAll(BFS(vertice, visitados, cola));
 			}
-			toReturn.add(vertice);
 		}
 		
 		return toReturn;
 	}
 
-	private void BFS(int vertice, HashMap<Integer,Boolean>visitados, Queue<Integer>cola) {
+	private ArrayList<Integer> BFS(int vertice, HashMap<Integer,Boolean>visitados, Queue<Integer>cola) {
+		ArrayList<Integer>toReturn = new ArrayList<Integer>();
 		visitados.put(vertice, true);
 		
 		cola.add(vertice);
@@ -52,14 +52,18 @@ public class ServicioBFS {
 		while(!cola.isEmpty()) {
 			cola.poll();
 			Iterator<Integer>adyacentes = grafo.obtenerAdyacentes(vertice);
+			toReturn.add(vertice);
 			while(adyacentes.hasNext()) {
 				int ady = adyacentes.next();
 				if(!visitados.containsKey(ady)) {
 					visitados.put(ady,true);
 					cola.add(ady);
+					toReturn.add(ady);
 				}
 			}
 		}
+		
+		return toReturn;
 	}
 	
 }

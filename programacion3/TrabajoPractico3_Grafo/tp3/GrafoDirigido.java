@@ -6,9 +6,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map.Entry;
 import java.util.Queue;
+import java.util.Set;
 
 public class GrafoDirigido<T> implements Grafo<T> {
-	private HashMap<Integer, HashMap<Integer,T>> listTheListAdy; 
+	private HashMap<Integer, HashMap<Integer,Arco<T>>> listTheListAdy; 
 	
 	public GrafoDirigido() {
 		this.listTheListAdy = new HashMap<>();
@@ -25,7 +26,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		if(!this.listTheListAdy.containsKey(verticeId)) {
 			this.listTheListAdy.put(verticeId, new HashMap<>());
 		}else {
-			System.out.println("El grafo ya contiene el " +verticeId);
+			System.out.println("El grafo ya contiene el " + verticeId);
 		}
 	}
 
@@ -40,7 +41,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 			//O(n)
 			for(int v : this.listTheListAdy.keySet()) {
 				//O(1)
-				HashMap<Integer, T> ady = this.listTheListAdy.get(v);
+				HashMap<Integer, Arco<T>> ady = this.listTheListAdy.get(v);
 				//O(1)
 				if(ady.containsKey(verticeId)) {
 					//O(1)
@@ -56,13 +57,13 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	// Agrega un arco con una etiqueta, que conecta el verticeId1 con el verticeId2
 	public void agregarArco(int verticeOrigen, int verticeDestino, T etiqueta) {
 		//accedo al mapInterno del grafo, donde guardo los arcos
-		HashMap<Integer, T> mapInterno = this.listTheListAdy.get(verticeOrigen);
+		HashMap<Integer, Arco<T>> mapInterno = this.listTheListAdy.get(verticeOrigen);
 		if(!mapInterno.containsKey(verticeDestino)) {
 			//creo un arco con el valor de origen y el valor de destino y la etiqueta
 			Arco<T> arcoNew = new Arco<T>(verticeOrigen, verticeDestino, etiqueta);
 
 			//al mapInterno le agrego el arco nuevo como id la referencia de destino
-			mapInterno.put(verticeDestino, (T)arcoNew);
+			mapInterno.put(verticeDestino, arcoNew);
 		}else {
 			System.out.println("Ya existe este arco");
 		}	
@@ -75,7 +76,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	*/
 	public void borrarArco(int verticeId1, int verticeId2) {
 		//O(1)
-		HashMap<Integer, T>ady = this.listTheListAdy.get(verticeId1);
+		HashMap<Integer, Arco<T>>ady = this.listTheListAdy.get(verticeId1);
 		//O(1)
 		if(this.existeArco(verticeId1, verticeId2)) {
 			//O(1)
@@ -95,7 +96,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	*/
 	public boolean existeArco(int verticeId1, int verticeId2) {
 		//O(1)
-		HashMap<Integer, T> ady = this.listTheListAdy.get(verticeId1);
+		HashMap<Integer, Arco<T>> ady = this.listTheListAdy.get(verticeId1);
 		//O(1)
 		return ady.containsKey(verticeId2);
 	}
@@ -105,9 +106,9 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		if(this.existeArco(verticeId1, verticeId2)) {
 			Arco<T> toReturn = null;
 			
-			HashMap<Integer,T>aux = this.listTheListAdy.get(verticeId1);
-		
-			toReturn = new Arco<>(verticeId1,verticeId2, aux.get(verticeId2));
+			HashMap<Integer,Arco<T>>aux = this.listTheListAdy.get(verticeId1);
+			
+			toReturn = aux.get(verticeId2);
 			
 			return toReturn;
 		}
@@ -123,9 +124,8 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	@Override
 	public int cantidadArcos() {
 		int cont = 0;
-		HashMap<Integer, T> aux = new HashMap<>();
 		for(int v : this.listTheListAdy.keySet()) {
-			HashMap<Integer, T> ady = this.listTheListAdy.get(v);
+			HashMap<Integer, Arco<T>> ady = this.listTheListAdy.get(v);
 			for(int a : ady.keySet()) {
 				cont++;
 			}
@@ -140,28 +140,37 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
 	@Override
 	public Iterator<Integer> obtenerAdyacentes(int verticeId) {
-		HashMap<Integer,T>toReturn =  this.listTheListAdy.get(verticeId);
+		HashMap<Integer,Arco<T>>toReturn =  this.listTheListAdy.get(verticeId);
 		return toReturn.keySet().iterator();
 	}
 
 	@Override
 	// Obtiene un iterador que me permite recorrer todos los arcos del grafo
 	public Iterator<Arco<T>> obtenerArcos() {
-		// TODO Auto-generated method stub
-		return null;
+		Iterator<Arco<T>>toReturn = null;
+		ArrayList<Arco<T>>aux = new ArrayList<>();
+		for(int v : this.listTheListAdy.keySet()) {
+			HashMap<Integer,Arco<T>>adyacentes = this.listTheListAdy.get(v);
+			aux.addAll(adyacentes.values());
+		}
+		toReturn = aux.iterator();
+		return toReturn;
 	}
 
 	@Override
+	// Obtiene un iterador que me permite recorrer todos los arcos que parten desde verticeId
 	public Iterator<Arco<T>> obtenerArcos(int verticeId) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Arco<T>>aux = new ArrayList<Arco<T>>();
+		HashMap<Integer,Arco<T>>adyacentes = this.listTheListAdy.get(verticeId);
+		aux.addAll(adyacentes.values());
+		return aux.iterator();
 	}
 	
 	@Override
 	public String toString() {
 		String toReturn= "";
 		//el .entrySet() nos da un consjunto de todas las claves y valores
-		for (Entry<Integer, HashMap<Integer, T>> entry : this.listTheListAdy.entrySet()) {
+		for (Entry<Integer, HashMap<Integer, Arco<T>>> entry : this.listTheListAdy.entrySet()) {
 			toReturn +=  "\n" + entry.getKey() ;
 			toReturn += "=";
 			toReturn += entry.getValue();			

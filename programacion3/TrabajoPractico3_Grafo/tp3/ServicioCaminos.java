@@ -42,7 +42,8 @@ public class ServicioCaminos {
 		return toReturn;
 		
 	}
-
+	
+//no marcar como visitados los vertices si no los arcos
 	public void caminos(int cursor, int destino,int lim, List<Integer> caminos, List<Integer> visitados, List<List<Integer>> toReturn){
 		visitados.add(cursor);		
 		//si es igual al que buscamos lo agregamoss a la lista a retornar
@@ -51,6 +52,7 @@ public class ServicioCaminos {
 		}else{
 			//Si no es igual, recorremos sus adyacentes y recursivamente repetimos el metodo
 			Iterator<Integer> adyacentes = this.grafo.obtenerAdyacentes(cursor);
+			//caminos ojo q son los vertices y no los arcos
 			while (adyacentes.hasNext() && lim > caminos.size()){
 				//guardo el adyacente donde estoy parado
 				int ady = adyacentes.next();
@@ -64,6 +66,7 @@ public class ServicioCaminos {
 				}
 			}
 		}
+		//BACKTRACKING
 		visitados.remove(visitados.size()-1);
 	}
 
