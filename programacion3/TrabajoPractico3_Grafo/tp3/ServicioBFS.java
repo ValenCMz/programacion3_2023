@@ -25,18 +25,15 @@ public class ServicioBFS {
 		cola.clear();
 
 		Iterator<Integer> iterador = grafo.obtenerVertices();
-		Iterator<Integer> iterador2 = grafo.obtenerVertices();
 		
 		//marco todos los vertices como no visitados
 		while(iterador.hasNext()){
 			visitados.put(iterador.next(), false);
 		}
 		
-		while(iterador2.hasNext()) {
-			int vertice = iterador2.next();
-			Boolean i = visitados.get(vertice);
-			if(i.equals(false)) {
-				toReturn.addAll(BFS(vertice, visitados, cola));
+		for(Integer v: visitados.keySet()) {
+			if(!visitados.get(v)) {
+				toReturn.addAll(BFS(v, visitados, cola));
 			}
 		}
 		
@@ -48,19 +45,22 @@ public class ServicioBFS {
 		visitados.put(vertice, true);
 		
 		cola.add(vertice);
-		
+		toReturn.add(vertice);
 		while(!cola.isEmpty()) {
-			cola.poll();
-			Iterator<Integer>adyacentes = grafo.obtenerAdyacentes(vertice);
-			toReturn.add(vertice);
+			int v = cola.poll();
+			
+			Iterator<Integer>adyacentes = grafo.obtenerAdyacentes(v);
 			while(adyacentes.hasNext()) {
 				int ady = adyacentes.next();
-				if(!visitados.containsKey(ady)) {
+				Boolean i = visitados.get(ady);		
+				if(i.equals(false)) {
 					visitados.put(ady,true);
 					cola.add(ady);
 					toReturn.add(ady);
+
 				}
 			}
+
 		}
 		
 		return toReturn;

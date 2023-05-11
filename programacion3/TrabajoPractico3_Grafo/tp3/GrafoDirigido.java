@@ -148,11 +148,14 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	// Obtiene un iterador que me permite recorrer todos los arcos del grafo
 	public Iterator<Arco<T>> obtenerArcos() {
 		Iterator<Arco<T>>toReturn = null;
+		
 		ArrayList<Arco<T>>aux = new ArrayList<>();
+		
 		for(int v : this.listTheListAdy.keySet()) {
 			HashMap<Integer,Arco<T>>adyacentes = this.listTheListAdy.get(v);
 			aux.addAll(adyacentes.values());
 		}
+		
 		toReturn = aux.iterator();
 		return toReturn;
 	}
