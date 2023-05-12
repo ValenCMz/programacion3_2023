@@ -1,8 +1,10 @@
 package tp3;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class ServicioCaminos {
 
@@ -24,7 +26,7 @@ public class ServicioCaminos {
 		//camino parcial para guardar los caminos que vamos recorriendo
 		List<Integer> caminos = new ArrayList<>();
 		//Visitados para no volver a pasar por un vertice 2 veces
-		List<Arco<Integer>> visitados = new ArrayList<>();
+		Set<Arco<Integer>> visitados = new HashSet<>();
 		//Agregamos el vertice desde donde partimos
 		caminos.add(this.origen);
 		//Metodo recursivo con variables que van a ser modificadas
@@ -43,7 +45,7 @@ public class ServicioCaminos {
 	}
 	
 //no marcar como visitados los vertices si no los arcos
-	public <T> void caminos(int cursor, int destino,int lim, List<Integer> caminos, List<Arco<Integer>> visitados, List<List<Integer>> toReturn){
+	public <T> void caminos(int cursor, int destino,int lim, List<Integer> caminos, Set<Arco<Integer>> visitados, List<List<Integer>> toReturn){
 		
 		//si es igual al que buscamos lo agregamoss a la lista a retornar
 		if(cursor == destino){
@@ -52,8 +54,7 @@ public class ServicioCaminos {
 			//Si no es igual, recorremos sus adyacentes y recursivamente repetimos el metodo
 			Iterator<Integer> adyacentes = this.grafo.obtenerAdyacentes(cursor);
 			//caminos ojo q son los vertices y no los arcos
-			System.out.println(visitados.size()+1);
-			while (adyacentes.hasNext() && lim >= visitados.size()+1){
+			while (adyacentes.hasNext() && lim > visitados.size()){
 				//guardo el adyacente donde estoy parado
 				int ady = adyacentes.next();
 				Arco<Integer>arcoAdy = (Arco<Integer>) this.grafo.obtenerArco(cursor, ady);
@@ -65,11 +66,10 @@ public class ServicioCaminos {
 					caminos(ady,destino,lim,caminos,visitados,toReturn);
 					//practicamente BACKTRACKING
 					caminos.remove(caminos.size()-1);
-					visitados.remove(visitados.size()-1);
+					visitados.remove(arcoAdy);
 				}
 			}
 		}
-		//BACKTRACKING
 	}
 	
 }

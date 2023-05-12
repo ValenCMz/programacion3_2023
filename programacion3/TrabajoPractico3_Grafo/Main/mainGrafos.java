@@ -90,7 +90,7 @@ public class mainGrafos {
 		List<Integer>auxBfs = bfs.bfsForest();
 		System.out.println(auxBfs);
 		
-		ServicioCaminos sc = new ServicioCaminos(grafo, 3, 9, 1);
+		ServicioCaminos sc = new ServicioCaminos(grafo, 3, 9, 2);
 		List<List<Integer>> auxSc = sc.caminos();
 		System.out.println( auxSc );
 //		System.out.println(grafo);
