@@ -72,6 +72,7 @@ public class mainGrafos {
 		grafo.agregarArco(3, 6, "");
 		grafo.agregarArco(6, 9, "");
 		grafo.agregarArco(7, 8, "");
+		grafo.agregarArco(6, 8, "");
 		
 		HashMap<Integer, Boolean> hash = new HashMap<>();
 		System.out.println(grafo);
@@ -89,7 +90,7 @@ public class mainGrafos {
 		List<Integer>auxBfs = bfs.bfsForest();
 		System.out.println(auxBfs);
 		
-		ServicioCaminos sc = new ServicioCaminos(grafo, 3, 9, 10);
+		ServicioCaminos sc = new ServicioCaminos(grafo, 3, 9, 1);
 		List<List<Integer>> auxSc = sc.caminos();
 		System.out.println( auxSc );
 //		System.out.println(grafo);
