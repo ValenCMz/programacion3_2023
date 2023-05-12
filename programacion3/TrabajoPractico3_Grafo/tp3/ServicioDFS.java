@@ -27,29 +27,33 @@ public class ServicioDFS {
 			int vertice = iterator2.next();
 			String color = listColors.get(vertice);
 			if(color.equals("BLANCO")) {
-				this.DFS_Visit(vertice, listColors);
+				toReturn.addAll(DFS_Visit(vertice, listColors));
 			}
-			toReturn.add(vertice);
 		}
 	
 		return toReturn;
 }
 	
 	
-	private void DFS_Visit(int nodoInicial, HashMap<Integer, String>listColors) {
+	private ArrayList<Integer> DFS_Visit(int nodoInicial, HashMap<Integer, String>listColors) {
+		ArrayList<Integer>toReturn = new ArrayList<>();
 		//Coloco el nodo en amarillo
 		listColors.put(nodoInicial, "AMARILLO");
+		
+		toReturn.add(nodoInicial);
 
 		Iterator<Integer> ady = grafo.obtenerAdyacentes(nodoInicial);
-	
 		while(ady.hasNext()) {
 			int adyacente = ady.next();
 			String color = listColors.get(adyacente);
 			if(color.equals("BLANCO")) {
-				DFS_Visit(adyacente, listColors);
+				ArrayList<Integer>adyVisitados = DFS_Visit(adyacente, listColors);
+				toReturn.addAll(adyVisitados);
 			}
 		}
 		
 		listColors.put(nodoInicial, "NEGRO");
+		
+		return toReturn;
 	}
 }
