@@ -21,21 +21,20 @@ public class ej4 {
 //	el grafo de entrada es acíclico.
 
 	public ArrayList<ArrayList<Integer>> caminosSimpleMasLargo(int origen, int destino){
-		ArrayList<ArrayList<Integer>> toReturn = new ArrayList<>();
 		ArrayList<Integer> visitados = new ArrayList<>();
-		ArrayList<Integer>caminos = new ArrayList<>();
-		caminos.add(origen);
-		caminosSimpleMasLargo(origen,destino,toReturn,visitados, caminos);
-		return toReturn;
-		
+		ArrayList<Integer>caminoActual= new ArrayList<>();
+		ArrayList<ArrayList<Integer>>caminoMasLargo = new ArrayList<>();
+		caminoActual.add(origen);
+		caminosSimpleMasLargo(origen,destino,caminoMasLargo,visitados,caminoActual);
+		return caminoMasLargo;
 	}
 	
-	private void caminosSimpleMasLargo(int origen, int destino, ArrayList<ArrayList<Integer>>toReturn,ArrayList<Integer> visitados, ArrayList<Integer>caminos) {
+	private void caminosSimpleMasLargo(int origen, int destino,	ArrayList<ArrayList<Integer>> caminoMasLargo,ArrayList<Integer> visitados, ArrayList<Integer>caminoActual) {
 		
-		if((caminos.size()-1 > toReturn.size()-1) && origen==destino) {
-			toReturn.add(new ArrayList<>(caminos));
+		if(origen==destino && caminoMasLargo.size() < caminoActual.size()) {
+			caminoMasLargo.clear();
+			caminoMasLargo.add(new ArrayList<>(caminoActual));
 		}
-		
 	
 		Iterator<Integer> adyacentes = this.grafo.obtenerAdyacentes(origen);
 		while (adyacentes.hasNext()){
@@ -43,13 +42,13 @@ public class ej4 {
 		
 			if( !visitados.contains(ady)){
 				visitados.add(origen);
-				caminos.add(ady);
-				caminosSimpleMasLargo(ady,destino,toReturn,visitados,caminos);
+				caminoActual.add(ady);
+				caminosSimpleMasLargo(ady,destino,caminoMasLargo,visitados,caminoActual);
 				visitados.remove(visitados.size()-1);
-				caminos.remove(caminos.size()-1);
+				caminoActual.remove(caminoActual.size()-1);
 			}
 		}
-		
+	
 }
 	
 

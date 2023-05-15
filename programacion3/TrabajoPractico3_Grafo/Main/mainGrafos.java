@@ -70,6 +70,7 @@ public class mainGrafos {
 		grafo.agregarVertice(9);
 		grafo.agregarVertice(11);
 		grafo.agregarVertice(5);
+		grafo.agregarVertice(2);
 
 		grafo.agregarArco(3, 8, "");
 //		grafo.agregarArco(8, 9, "");
@@ -80,6 +81,8 @@ public class mainGrafos {
 		grafo.agregarArco(9, 11, "");
 		grafo.agregarArco(8, 5, "");
 		grafo.agregarArco(5, 11, "");
+		grafo.agregarArco(3, 2, "");
+		grafo.agregarArco(2, 11, "");
 		
 		HashMap<Integer, Boolean> hash = new HashMap<>();
 		System.out.println(grafo);
