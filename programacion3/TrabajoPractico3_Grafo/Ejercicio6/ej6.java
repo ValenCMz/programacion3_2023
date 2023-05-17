@@ -18,21 +18,42 @@ public class ej6 {
 		return caminoAlternativo;
 	}
 	
-	public void calcularConexion(ArrayList<Integer>caminoAlternativo,Grafo<?>g,int current, int destino, int i) {
-		if(current==destino) {
-			return;
-		}else {
-			Iterator<Integer> it = g.obtenerAdyacentes(current);
-			while(it.hasNext()) {
-				int ady = it.next();
-					if(current!=i) {
-						caminoAlternativo.add(ady);
-						calcularConexion(caminoAlternativo, g, ady, destino,i);
-					}else {
-						caminoAlternativo.remove(caminoAlternativo.size()-1);
-					}
-			}
-		}	
+	
+	public boolean calcularConexion(ArrayList<Integer>caminoAlternativo,Grafo<?>g,int current, int destino, int i) {
+	Boolean encontrado = false;
+	if(current==destino) {
+		encontrado = true;
 	}
-
+	Iterator<Integer> it = g.obtenerAdyacentes(current);
+	while(it.hasNext()) {
+		int ady = it.next();
+			if(current!=i) {
+				caminoAlternativo.add(ady);
+				if(calcularConexion(caminoAlternativo, g, ady, destino,i)) {
+					return true;
+				}
+			}else {
+				caminoAlternativo.remove(caminoAlternativo.size()-1);
+			}
+	}
+	return encontrado;
 }
+}
+	
+//	public void calcularConexion(ArrayList<Integer>caminoAlternativo,Grafo<?>g,int current, int destino, int i,Boolean encontrado) {
+//		if(!encontrado) {
+//			Iterator<Integer> it = g.obtenerAdyacentes(current);
+//			while(it.hasNext()) {
+//				int ady = it.next();
+//					if(current!=i) {
+//						caminoAlternativo.add(ady);
+//						calcularConexion(caminoAlternativo, g, ady, destino,i,encontrado);
+//					}else {
+//						caminoAlternativo.remove(caminoAlternativo.size()-1);
+//					}
+//			}
+//		}
+//	}
+//	
+	
+

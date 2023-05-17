@@ -124,7 +124,7 @@ public class mainGrafos {
 		System.out.println(auxej5);
 
 		ej6 e6 = new ej6();
-		ArrayList<Integer> auxej6 = e6.calcularConexion(grafo, 3, 11, 6);
+		ArrayList<Integer> auxej6 = e6.calcularConexion(grafo, 3, 11, 8);
 		System.out.println("-----------------");
 		System.out.println(auxej6);
 		
