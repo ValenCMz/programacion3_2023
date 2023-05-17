@@ -7,6 +7,7 @@ import java.util.List;
 import Ejercicio3.ejercicio3;
 import Ejercicio4.ej4;
 import Ejercicio5.ej5;
+import Ejercicio6.ej6;
 import tp3.Arco;
 import tp3.GrafoDirigido;
 import tp3.ServicioBFS;
@@ -122,6 +123,10 @@ public class mainGrafos {
 		System.out.println("------------------");
 		System.out.println(auxej5);
 
+		ej6 e6 = new ej6();
+		ArrayList<Integer> auxej6 = e6.calcularConexion(grafo, 3, 11, 6);
+		System.out.println("-----------------");
+		System.out.println(auxej6);
 		
 		
 		

@@ -31,8 +31,6 @@ public class ej4 {
 	
 	private void caminosSimpleMasLargo(int origen, int destino,	ArrayList<Integer> caminoMasLargo,ArrayList<Integer> visitados, ArrayList<Integer>caminoActual) {
 		
-		System.out.println("caminos mas largo: " + caminoMasLargo.size());
-		System.out.println("camino mas corto " + caminoActual.size());
 		if(origen==destino && caminoMasLargo.size() < caminoActual.size()) {
 			caminoMasLargo.clear();
 			caminoMasLargo.addAll(caminoActual);

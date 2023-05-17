@@ -23,17 +23,17 @@ public class ej5 {
 	public ArrayList<Integer> ejercicio5(Grafo<?>grafo,int v){
 		ArrayList<Integer> solucion = new ArrayList<>();
 		ArrayList<Integer> camino = new ArrayList<>();
-		ArrayList<Integer> toReturn = new ArrayList<>();
+		ArrayList<Integer> auxiliar = new ArrayList<>();
 		
 		Iterator<Integer> iterador = grafo.obtenerVertices();
 		
 		while(iterador.hasNext()) {
 			int vertice = iterador.next();
 			if(vertice!=v) {
-				ejercicio5(vertice,v,grafo,toReturn,camino);
+				ejercicio5(vertice,v,grafo,auxiliar,camino);
 			}
 			//para no agregar repetidos a la solucion
-			for(Integer i : toReturn) {
+			for(Integer i : auxiliar) {
 				if(!solucion.contains(i)) {
 					solucion.add(i);
 				}
@@ -43,18 +43,18 @@ public class ej5 {
 		
 	}
 	
-	private void ejercicio5(int vertice, int destino, Grafo<?>grafo,ArrayList<Integer>toReturn,ArrayList<Integer>camino) {
+	private void ejercicio5(int vertice, int destino, Grafo<?>grafo,ArrayList<Integer>auxiliar,ArrayList<Integer>camino) {
 		if(vertice!=destino) {
 			camino.add(vertice);
 			Iterator<Integer> iterador = grafo.obtenerAdyacentes(vertice);
 			while(iterador.hasNext()) {
 				int ady = iterador.next();
-				ejercicio5(ady,destino,grafo,toReturn,camino);
+				ejercicio5(ady,destino,grafo,auxiliar,camino);
 			}
 			//ESTO ES CLAVE, TENGO Q TENERLO MUY EN CUENTA
 			camino.remove(camino.size()-1);
 		}else {
-			toReturn.addAll(camino);
+			auxiliar.addAll(camino);
 		}
 	}
 	
