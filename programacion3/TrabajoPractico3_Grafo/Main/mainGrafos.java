@@ -6,6 +6,7 @@ import java.util.List;
 
 import Ejercicio3.ejercicio3;
 import Ejercicio4.ej4;
+import Ejercicio5.ej5;
 import tp3.Arco;
 import tp3.GrafoDirigido;
 import tp3.ServicioBFS;
@@ -78,10 +79,10 @@ public class mainGrafos {
 		grafo.agregarArco(3, 6, "");
 		grafo.agregarArco(6, 9, "");
 		grafo.agregarArco(7, 8, "");
-		grafo.agregarArco(9, 11, "");
+//		grafo.agregarArco(9, 11, "");
 		grafo.agregarArco(8, 5, "");
 		grafo.agregarArco(5, 11, "");
-		grafo.agregarArco(3, 2, "");
+		grafo.agregarArco(9, 2, "");
 		grafo.agregarArco(2, 11, "");
 		
 		HashMap<Integer, Boolean> hash = new HashMap<>();
@@ -112,9 +113,14 @@ public class mainGrafos {
 		System.out.println(e3.dfsForest());
 		
 		ej4 e4 = new ej4(grafo);
-		ArrayList<ArrayList<Integer>> auxej4 = e4.caminosSimpleMasLargo(3, 11);
+		ArrayList<Integer> auxej4 = e4.caminosSimpleMasLargo(3, 11);
 		System.out.println("------------------");
 		System.out.println(auxej4);
+		
+		ej5 e5 = new ej5();
+		ArrayList<Integer> auxej5 = e5.ejercicio5(grafo, 5);
+		System.out.println("------------------");
+		System.out.println(auxej5);
 
 		
 		

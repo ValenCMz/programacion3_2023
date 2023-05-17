@@ -21,6 +21,7 @@ public class ejercicio3 {
 		HashMap<Integer,String>listColors = new HashMap<>();
 		Iterator<Integer> iterator = grafo.obtenerVertices();
 		Iterator<Integer> iterator2 = grafo.obtenerVertices();
+		
 		while(iterator.hasNext()) {
 			listColors.put(iterator.next(), "BLANCO");
 		}

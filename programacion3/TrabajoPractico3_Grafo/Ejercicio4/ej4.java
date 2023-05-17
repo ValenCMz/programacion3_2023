@@ -20,20 +20,22 @@ public class ej4 {
 //	camino simple (sin ciclos) de mayor longitud del vértice i al vértice j. Puede suponerse que
 //	el grafo de entrada es acíclico.
 
-	public ArrayList<ArrayList<Integer>> caminosSimpleMasLargo(int origen, int destino){
+	public ArrayList<Integer> caminosSimpleMasLargo(int origen, int destino){
 		ArrayList<Integer> visitados = new ArrayList<>();
 		ArrayList<Integer>caminoActual= new ArrayList<>();
-		ArrayList<ArrayList<Integer>>caminoMasLargo = new ArrayList<>();
+		ArrayList<Integer>caminoMasLargo = new ArrayList<>();
 		caminoActual.add(origen);
 		caminosSimpleMasLargo(origen,destino,caminoMasLargo,visitados,caminoActual);
 		return caminoMasLargo;
 	}
 	
-	private void caminosSimpleMasLargo(int origen, int destino,	ArrayList<ArrayList<Integer>> caminoMasLargo,ArrayList<Integer> visitados, ArrayList<Integer>caminoActual) {
+	private void caminosSimpleMasLargo(int origen, int destino,	ArrayList<Integer> caminoMasLargo,ArrayList<Integer> visitados, ArrayList<Integer>caminoActual) {
 		
+		System.out.println("caminos mas largo: " + caminoMasLargo.size());
+		System.out.println("camino mas corto " + caminoActual.size());
 		if(origen==destino && caminoMasLargo.size() < caminoActual.size()) {
 			caminoMasLargo.clear();
-			caminoMasLargo.add(new ArrayList<>(caminoActual));
+			caminoMasLargo.addAll(caminoActual);
 		}
 	
 		Iterator<Integer> adyacentes = this.grafo.obtenerAdyacentes(origen);
