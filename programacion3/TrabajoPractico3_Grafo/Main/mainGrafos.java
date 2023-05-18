@@ -128,7 +128,7 @@ public class mainGrafos {
 		System.out.println("-----------------");
 		System.out.println(auxej6);
 		
-		
+		System.out.println(grafo.cantidadArcos());
 		
 	}
 	

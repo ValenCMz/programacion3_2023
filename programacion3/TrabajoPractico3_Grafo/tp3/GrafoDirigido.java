@@ -54,15 +54,18 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	}
 
 	@Override
-	// Agrega un arco con una etiqueta, que conecta el verticeId1 con el verticeId2
+	
+	/**
+	* Complejidad: O(n) donde n es el tamaño de entradas del mapInterno debido 
+	* a que en el peor de los casos "el elemento se va a agregar al final de la lista".
+	*/
 	public void agregarArco(int verticeOrigen, int verticeDestino, T etiqueta) {
-		//accedo al mapInterno del grafo, donde guardo los arcos
+		//O(1)
 		HashMap<Integer, Arco<T>> mapInterno = this.listTheListAdy.get(verticeOrigen);
 		if(!mapInterno.containsKey(verticeDestino)) {
-			//creo un arco con el valor de origen y el valor de destino y la etiqueta
+			//O(1)
 			Arco<T> arcoNew = new Arco<T>(verticeOrigen, verticeDestino, etiqueta);
-
-			//al mapInterno le agrego el arco nuevo como id la referencia de destino
+			//O(n)
 			mapInterno.put(verticeDestino, arcoNew);
 		}else {
 			System.out.println("Ya existe este arco");
@@ -85,14 +88,18 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	}
 
 	@Override
+	/**
+	* Complejidad: O(1) donde 1 es es una unidad constante de tiempo debido a que debe
+	* "chequear si el grafo contiene el vertice no depende del tamño del problema o de los datos de entrada".
+	*/
 	public boolean contieneVertice(int verticeId) {
 		return this.listTheListAdy.containsKey(verticeId);
 	}
 
 	@Override
 	/**
-	* Complejidad: O(1) donde 1 es el tamaño de entrada debido a que debe
-	* "verificar que exista la clave".
+	* Complejidad: O(1) donde 1 es una unidad constante de tiempo debido a que debe
+	* "chequear si el grafo contiene el arco, y esto no depende del tamaño del problem o delos datos de entrada"
 	*/
 	public boolean existeArco(int verticeId1, int verticeId2) {
 		//O(1)
@@ -102,12 +109,17 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	}
 
 	@Override
+	/**
+	* Complejidad: O(1) donde 1 es una unidad constante de tiempo debido a que debe
+	* "obtener un arco especifico del grafo, y esto no depende del tamaño del problem o delos datos de entrada"
+	*/
 	public Arco<T> obtenerArco(int verticeId1, int verticeId2) {
+		//O(1)
 		if(this.existeArco(verticeId1, verticeId2)) {
 			Arco<T> toReturn = null;
-			
+			//O(1)
 			HashMap<Integer,Arco<T>>aux = this.listTheListAdy.get(verticeId1);
-			
+			//O(1)
 			toReturn = aux.get(verticeId2);
 			
 			return toReturn;
@@ -117,51 +129,78 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	
 	
 	@Override
+	/**
+	* Complejidad: O(1) donde 1 es una unidad constante de tiempo debido a que debe
+	* "solo obtener el tamaño de la estructura de datos interna, 
+	* y esto no depende del tamaño del problem o delos datos de entrada"
+	*/
 	public int cantidadVertices() {
+		//O(1)
 		return this.listTheListAdy.size();
 	}
 
 	@Override
+	/**
+	* Complejidad: O(n) donde n es numero de pares clave valor debido a que debe
+	* "debe recorrer todos los elementos de listTheListAdy para poder obtener los arcos 
+	* salientes de cada vertice"
+	*/
 	public int cantidadArcos() {
 		int cont = 0;
+		//O(n)
 		for(int v : this.listTheListAdy.keySet()) {
+			//O(1)
 			HashMap<Integer, Arco<T>> ady = this.listTheListAdy.get(v);
-			for(int a : ady.keySet()) {
-				cont++;
-			}
+			//O(1)
+			cont += ady.size();
 		}
 		return cont;
 	}
 
 	@Override
+	/**
+	* Complejidad: O(1) donde 1 es una unidad constante de tiempo debido a que debe
+	* "se utiliza el keySet() pero no se recorren sus elementos, solo se le pide el iterador
+	* al conjunto de valores y esto tiene una complejidad O(1)"
+	*/
 	public Iterator<Integer> obtenerVertices() {
+		//O(1)
 		return this.listTheListAdy.keySet().iterator();
 	}
 
 	@Override
+	/**
+	* Complejidad: O(1) donde 1 es una unidad constante de tiempo debido a que debe
+	* "se utilza el keySet() pero tampoco se recorren sus elementos"
+	*/
 	public Iterator<Integer> obtenerAdyacentes(int verticeId) {
+		//O(1)
 		HashMap<Integer,Arco<T>>toReturn =  this.listTheListAdy.get(verticeId);
+		//O(1)
 		return toReturn.keySet().iterator();
 	}
 
 	@Override
-	// Obtiene un iterador que me permite recorrer todos los arcos del grafo
+	/**
+	* Complejidad: O(n) donde n es el numero de claves debido a que debe
+	* "recorrer la listTheListAdy para ir obteniendo los arcos de sus adyacentes"
+	*/
 	public Iterator<Arco<T>> obtenerArcos() {
-		Iterator<Arco<T>>toReturn = null;
-		
-		ArrayList<Arco<T>>aux = new ArrayList<>();
-		
+		Iterator<Arco<T>>toReturn = null;		
+		ArrayList<Arco<T>>aux = new ArrayList<>();	
 		for(int v : this.listTheListAdy.keySet()) {
-			HashMap<Integer,Arco<T>>adyacentes = this.listTheListAdy.get(v);
+			HashMap<Integer,Arco<T>>adyacentes = this.listTheListAdy.get(v);			
 			aux.addAll(adyacentes.values());
 		}
-		
 		toReturn = aux.iterator();
 		return toReturn;
 	}
 
 	@Override
-	// Obtiene un iterador que me permite recorrer todos los arcos que parten desde verticeId
+	/**
+	* Complejidad: O(n) donde n es el numero de adyacentes para el vertice debido a que debe
+	* "la complejidad se relaciona con la cantidad de adyacentes del vertice, no con el tamaño del grafo"
+	*/
 	public Iterator<Arco<T>> obtenerArcos(int verticeId) {
 		ArrayList<Arco<T>>aux = new ArrayList<Arco<T>>();
 		HashMap<Integer,Arco<T>>adyacentes = this.listTheListAdy.get(verticeId);
