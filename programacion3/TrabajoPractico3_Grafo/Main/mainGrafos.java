@@ -8,6 +8,7 @@ import Ejercicio3.ejercicio3;
 import Ejercicio4.ej4;
 import Ejercicio5.ej5;
 import Ejercicio6.ej6;
+import Ejercicio7.ej7;
 import tp3.Arco;
 import tp3.GrafoDirigido;
 import tp3.ServicioBFS;
@@ -128,7 +129,10 @@ public class mainGrafos {
 		System.out.println("-----------------");
 		System.out.println(auxej6);
 		
-		System.out.println(grafo.cantidadArcos());
+		ej7 e7 = new ej7();
+		ArrayList<Integer> auxej7 = e7.ejercicio7(3, 11, grafo);
+		System.out.println("-----------");
+		System.out.println(auxej7);
 		
 	}
 	
