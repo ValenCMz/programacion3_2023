@@ -79,12 +79,12 @@ public class mainGrafos {
 //		grafo.agregarArco(8, 9, "");
 		grafo.agregarArco(3, 10, "");
 		grafo.agregarArco(3, 6, "");
-		grafo.agregarArco(6, 9, "");
+		grafo.agregarArco(6, 2, "");
 		grafo.agregarArco(7, 8, "");
 //		grafo.agregarArco(9, 11, "");
 		grafo.agregarArco(8, 5, "");
-		grafo.agregarArco(5, 11, "");
-		grafo.agregarArco(9, 2, "");
+		grafo.agregarArco(5, 9, "");
+		grafo.agregarArco(9, 11, "");
 		grafo.agregarArco(2, 11, "");
 		
 		HashMap<Integer, Boolean> hash = new HashMap<>();

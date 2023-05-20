@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 import tp3.Grafo;
@@ -20,29 +19,33 @@ public class ej7 {
 //	esquinas, devuelva el camino más corto entre ambas de manera de caminar la menor
 //	cantidad de cuadras posible.
 
+	//El profesor me dijo que tengo que ir guardando una referencia de mi anterior y ir armando mi camino de atras para adelante
 	
 	public ArrayList<Integer>ejercicio7(int origen, int destino, Grafo<?>grafo){
 		ArrayList<Integer>toReturn = new ArrayList<>();
 		HashMap<Integer,Boolean>visitados = new HashMap<>();
 		Queue<Integer>cola = new LinkedList<Integer>();
+		//referencias se va a guardar en la clave el hijo y en valor el padre
+		HashMap<Integer,Integer>referencias = new HashMap<>();
 		cola.clear();
 		Iterator<Integer> it = grafo.obtenerVertices();
 		
 		while(it.hasNext()) {
-			visitados.put(it.next(), false);
+			int v = it.next();
+			visitados.put(v, false);
+			referencias.put(v, null);
 		}
 		
 		
-		ejercicio7(origen,destino,grafo,toReturn,visitados,cola);
+		ejercicio7(origen,destino,grafo,toReturn,visitados,cola,referencias);
 		
 	
 		return toReturn;
 	}
 	
-	private void ejercicio7(int origen, int destino, Grafo<?> grafo, ArrayList<Integer> toReturn,HashMap<Integer, Boolean> visitados, Queue<Integer> cola) {
+	private void ejercicio7(int origen, int destino, Grafo<?> grafo, ArrayList<Integer> toReturn,HashMap<Integer, Boolean> visitados, Queue<Integer> cola,HashMap<Integer,Integer>referencias) {
 		visitados.put(origen, true);
 		cola.add(origen);
-		toReturn.add(origen);
 		while(!cola.isEmpty()) {
 			int v = cola.poll();
 		
@@ -54,10 +57,21 @@ public class ej7 {
 				if(i.equals(false)) {
 					visitados.put(ady, true);
 					cola.add(ady);
-					if(ady!=destino) {
-						toReturn.add(ady);
+					referencias.put(ady, v);
+					
 					}
 					
+				//Aca se arma el camino de atras para adelante
+				if(ady==destino) {
+					Integer nodo = destino;
+					while(nodo!=null) {
+						if(!toReturn.contains(nodo)) {
+							toReturn.add(0,nodo);
+						}
+						nodo = referencias.get(nodo);
+					}
+		
+				}
 				}
 			
 			}
@@ -71,5 +85,4 @@ public class ej7 {
 	
 	
 	
-	
-}
+
