@@ -189,8 +189,8 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		Iterator<Arco<T>>toReturn = null;		
 		ArrayList<Arco<T>>aux = new ArrayList<>();	
 		for(int v : this.listTheListAdy.keySet()) {
-			HashMap<Integer,Arco<T>>adyacentes = this.listTheListAdy.get(v);			
-			aux.addAll(adyacentes.values());
+			HashMap<Integer,Arco<T>>arcos = this.listTheListAdy.get(v);			
+			aux.addAll(arcos.values());
 		}
 		toReturn = aux.iterator();
 		return toReturn;
@@ -203,8 +203,8 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	*/
 	public Iterator<Arco<T>> obtenerArcos(int verticeId) {
 		ArrayList<Arco<T>>aux = new ArrayList<Arco<T>>();
-		HashMap<Integer,Arco<T>>adyacentes = this.listTheListAdy.get(verticeId);
-		aux.addAll(adyacentes.values());
+		HashMap<Integer,Arco<T>>arcos = this.listTheListAdy.get(verticeId);
+		aux.addAll(arcos.values());
 		return aux.iterator();
 	}
 	

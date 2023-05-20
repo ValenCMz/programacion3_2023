@@ -54,8 +54,10 @@ public class ej7 {
 				if(i.equals(false)) {
 					visitados.put(ady, true);
 					cola.add(ady);
-					toReturn.add(ady);
-				
+					if(ady!=destino) {
+						toReturn.add(ady);
+					}
+					
 				}
 			
 			}

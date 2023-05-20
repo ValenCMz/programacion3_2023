@@ -45,7 +45,7 @@ public class ServicioCaminos {
 	}
 	
 //no marcar como visitados los vertices si no los arcos
-	public <T> void caminos(int cursor, int destino,int lim, List<Integer> caminos, Set<Arco<Integer>> visitados, List<List<Integer>> toReturn){
+	private void caminos(int cursor, int destino,int lim, List<Integer> caminos, Set<Arco<Integer>> visitados, List<List<Integer>> toReturn){
 		
 		//si es igual al que buscamos lo agregamoss a la lista a retornar
 		if(cursor == destino){
