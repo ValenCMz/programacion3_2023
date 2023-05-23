@@ -3,7 +3,7 @@ package Ejercicio6;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import tp3.Grafo;
+import tpe.Grafo;
 
 public class ej6 {
 

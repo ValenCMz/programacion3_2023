@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import tp3.Grafo;
+import tpe.Grafo;
 
 public class ej7 {
 

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import tp3.Arco;
-import tp3.Grafo;
+import tpe.Arco;
+import tpe.Grafo;
 
 public class ej4 {
 

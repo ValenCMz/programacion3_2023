@@ -9,11 +9,11 @@ import Ejercicio4.ej4;
 import Ejercicio5.ej5;
 import Ejercicio6.ej6;
 import Ejercicio7.ej7;
-import tp3.Arco;
-import tp3.GrafoDirigido;
-import tp3.ServicioBFS;
-import tp3.ServicioCaminos;
-import tp3.ServicioDFS;
+import tpe.Arco;
+import tpe.GrafoDirigido;
+import tpe.ServicioBFS;
+import tpe.ServicioCaminos;
+import tpe.ServicioDFS;
 
 public class mainGrafos {
 

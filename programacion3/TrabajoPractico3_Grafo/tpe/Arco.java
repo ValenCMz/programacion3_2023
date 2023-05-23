@@ -1,4 +1,4 @@
-package tp3;
+package tpe;
 
 /*
  * La clase arco representa un arco del grafo. Contiene un vertice origen, un vertice destino y una etiqueta.

@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import tp3.Grafo;
+import tpe.Grafo;
 
 public class ej5 {
 

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import tp3.Grafo;
+import tpe.Grafo;
 
 public class ejercicio3 {
 
