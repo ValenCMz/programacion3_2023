@@ -11,5 +11,6 @@
 	<classpathentry kind="src" path="TrabajoPractico2_Ordenamientos"/>
 	<classpathentry kind="src" path="Ejercicios_recursividad"/>
 	<classpathentry kind="src" path="TrabajoPractico3_Grafo"/>
+	<classpathentry kind="src" path="BackTracking"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
