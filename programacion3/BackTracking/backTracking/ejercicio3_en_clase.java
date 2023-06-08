@@ -24,7 +24,7 @@ public class ejercicio3_en_clase {
 		}else {//seguir explorando el arbol
 			//generar hijo por cada posible solucion
 			
-			//llamado que no pone el valor en S
+			//llamado que no pone el valor en Solucion
 			int valor = estado.sacarPrimeroDelConjunto();//saca el elemento y lo borra
 			this.backTracking(estado);
 			estado.agregarElementoEnSuPosicion(valor);//va a colocar el elemento en la posicion donde fue retirado
