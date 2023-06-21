@@ -45,7 +45,8 @@ public class CSVReader {
 		
 		System.out.println(grafo);
 		backTracking back = new backTracking(grafo);	
-		back.metodoBackTracking();
+		ArrayList<Arco<Object>>solucionBack = back.metodoBackTracking();
+		System.out.println(solucionBack);
 		
 	}
 
