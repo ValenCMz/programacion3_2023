@@ -5,6 +5,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
+import backTracking.backTracking;
+import tpe.Arco;
+import tpe.Grafo;
+import tpe.GrafoNoDirigido;
 
 
 public class CSVReader {
@@ -22,6 +29,8 @@ public class CSVReader {
 		// lines.get(1) tiene la segunda linea del archivo... y así
 		ArrayList<String[]> lines = this.readContent();
 		
+		Grafo<Integer> grafo = new GrafoNoDirigido<>();
+		
 		for (String[] line: lines) {
 			// Cada linea es un arreglo de Strings, donde cada posicion guarda un elemento
 			Integer origen = Integer.parseInt(line[0].trim().substring(1));
@@ -29,7 +38,14 @@ public class CSVReader {
 			Integer etiqueta = Integer.parseInt(line[2].trim());
 			
 			// Aca instanciar lo que necesiten en base a los datos leidos
+			grafo.agregarVertice(origen);
+			grafo.agregarVertice(destino);
+			grafo.agregarArco(origen, destino, etiqueta);
 		}
+		
+		System.out.println(grafo);
+		backTracking back = new backTracking(grafo);	
+		back.metodoBackTracking();
 		
 	}
 

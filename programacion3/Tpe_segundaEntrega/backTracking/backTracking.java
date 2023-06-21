@@ -1,6 +1,7 @@
 package backTracking;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import tpe.Arco;
@@ -9,27 +10,26 @@ import tpe.Grafo;
 public class backTracking {
 	private Grafo<?> redDeSubterraneos; //redDeSubterraneos (grafo que tiene todas las estaciones y tuneles)
 	//este grafo va a tener -conjuntoEstaciones, -conjuntoTuneles
-	private ArrayList<Arco<Object>>caminoSolucion;
+	private ArrayList<Arco<Object>>caminoSolucion;//Esto no se si deberia ser de arcos
+	private Integer distanciaSolucion;
 
-	public backTracking() {
-		// TODO Auto-generated constructor stub
+	public backTracking(Grafo<?>grafo) {
+		this.redDeSubterraneos = grafo;
+		this.distanciaSolucion = 0;
 	}
-
-	/*Estado va a tener
-	 * estacionActual
-	 * -caminoParcial
-	 * -distanciaParcial
-	 * -distanciaSolucion
-	 * -estacionesVisitadas
-	 * -adyacentes
-	 */
 	
-	public void metodoBackTracking(Estado estado) {
+	public void metodoBackTracking() {
 		//estan todas las estaciones, hay q chequearlo?
+		
+		ArrayList<Integer>caminoParcial = new ArrayList<>();
+		Integer distanciaParcial;
+		HashMap<Integer, Boolean>estacionesVisitadas = new HashMap<>();
+		ArrayList<Integer>conjuntoEstaciones = new ArrayList<>();
+		
 		
 		Iterator<Integer>iterador = redDeSubterraneos.obtenerVertices();
 		while(iterador.hasNext()) {
-			estado.agregarAVisitados(iterador.next(),false);
+			estacionesVisitadas.put(iterador.next(),false);
 		}
 		this.metodoBackTrackingRecursivo(estado);
 	}
@@ -37,8 +37,8 @@ public class backTracking {
 	
 	private void metodoBackTrackingRecursivo(Estado estado) {
 		
-		if(estado.todasLasEstacionesVisitadas()) {//estado final
-			if(estado.distanciaParcial<estado.distanciaSolucion) {//obtenemos distancias
+		if(estado.todasLasEstacionesVisitadas()) {//estado final 
+			if(estado.distanciaParcial<estado.distanciaSolucion) {//obtenemos distancias (no deberia ser que el caminoSolucion conecte todas las estaciones?
 				estado.distanciaSolucion = estado.distanciaParcial;
 				estado.caminoSolucion = estado.caminoParcial;
 			}

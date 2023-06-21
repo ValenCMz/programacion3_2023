@@ -21,8 +21,6 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	public void agregarVertice(int verticeId) {
 		if(!this.listTheListAdy.containsKey(verticeId)) {
 			this.listTheListAdy.put(verticeId, new HashMap<>());
-		}else {
-			System.out.println("El grafo ya contiene el " + verticeId);
 		}
 	}
 
@@ -179,15 +177,16 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		aux.addAll(arcos.values());
 		return aux.iterator();
 	}
+
 	
 	@Override
 	public String toString() {
 		String toReturn= "";
 		//el .entrySet() nos da un consjunto de todas las claves y valores
 		for (Entry<Integer, HashMap<Integer, Arco<T>>> entry : this.listTheListAdy.entrySet()) {
-			toReturn +=  "\n" + entry.getKey() ;
-			toReturn += "=";
-			toReturn += entry.getValue();			
+			toReturn +=  "\n"+ entry.getKey();
+			toReturn +=  "=";
+			toReturn +=  entry.getValue() ;			
         }
 		return toReturn;
 	}
