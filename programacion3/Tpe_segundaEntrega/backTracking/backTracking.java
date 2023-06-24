@@ -36,7 +36,9 @@ public class backTracking {
 		Iterator<Integer>iteradorEstaciones = redDeSubterraneos.obtenerVertices();
 		while(iteradorEstaciones.hasNext()) {
 			Integer next = iteradorEstaciones.next();
+			estacionesVisitadas.put(next, true);
 			this.metodoBackTrackingRecursivo(next, caminoParcial, distanciaParcial,estacionesVisitadas);
+			estacionesVisitadas.put(next,false);
 		}
 		
 		ArrayList<Arco<Object>>toReturn  = new ArrayList<Arco<Object>>(caminoSolucion);
@@ -51,7 +53,7 @@ public class backTracking {
 		
 		if(this.todasLasEstacionesVisitadas(estacionesVisitadas)) {//estado final 
 			//(no deberia ser que el caminoSolucion conecte todas las estaciones?
-			if(distanciaParcial < this.distanciaSolucion) {//obtenemos distancias 
+			if(distanciaParcial < this.distanciaSolucion || this.distanciaSolucion == 0 ) {//obtenemos distancias 
 				this.distanciaSolucion = distanciaParcial;
 				this.caminoSolucion = caminoParcial;
 			}
@@ -59,22 +61,23 @@ public class backTracking {
 		}else {
 				
 			Iterator<Integer> ady = redDeSubterraneos.obtenerAdyacentes(estacionActual);
-			Boolean estacionVisitada = estacionesVisitadas.get(estacionActual);
-			estacionesVisitadas.put(estacionActual, true);
 			
-			while(ady.hasNext() && !estacionVisitada) {
+			while(ady.hasNext()) {
+				
 				Integer estacionSiguiente = ady.next();
-				Arco<Object>arco = (Arco<Object>) redDeSubterraneos.obtenerArco(estacionActual, estacionSiguiente);
-				estacionesVisitadas.put(estacionSiguiente, true);
-				caminoParcial.add(arco);
-				distanciaParcial = this.sumarADistanciaActual(arco, distanciaParcial);//suma la cantidad de metros a nuestra distancia actual
-				
-				metodoBackTrackingRecursivo(estacionSiguiente,caminoParcial,distanciaParcial,estacionesVisitadas);
-				
-				estacionesVisitadas.put(estacionSiguiente, false);
-				caminoParcial.remove(arco);
-				distanciaParcial = this.restarADistanciaActual(arco, distanciaParcial);
-	
+				Boolean estacionVisitada = estacionesVisitadas.get(estacionSiguiente);
+				if(!estacionVisitada) {
+					Arco<Object>arco = (Arco<Object>) redDeSubterraneos.obtenerArco(estacionActual, estacionSiguiente);
+					estacionesVisitadas.put(estacionSiguiente, true);
+					caminoParcial.add(arco);
+					distanciaParcial = this.sumarADistanciaActual(arco, distanciaParcial);//suma la cantidad de metros a nuestra distancia actual
+					
+					metodoBackTrackingRecursivo(estacionSiguiente,caminoParcial,distanciaParcial,estacionesVisitadas);
+					
+					estacionesVisitadas.put(estacionSiguiente, false);
+					caminoParcial.remove(arco);
+					distanciaParcial = this.restarADistanciaActual(arco, distanciaParcial);
+				}
 			}
 			
 		}
