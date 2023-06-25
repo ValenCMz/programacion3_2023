@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import backTracking.backTracking;
+import backTracking.BackTracking;
+
 import tpe.Arco;
 import tpe.Grafo;
 import tpe.GrafoNoDirigido;
@@ -44,8 +45,8 @@ public class CSVReader {
 		}
 		
 		System.out.println(grafo);
-		backTracking back = new backTracking(grafo);	
-		ArrayList<Arco<Object>>solucionBack = back.metodoBackTracking();
+		BackTracking back = new BackTracking(grafo);	
+		String solucionBack = back.metodoBackTracking();
 		System.out.println(solucionBack);
 		
 	}
