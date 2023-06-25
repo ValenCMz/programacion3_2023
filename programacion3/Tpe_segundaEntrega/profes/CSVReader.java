@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import Greedy.Greedy;
 import backTracking.BackTracking;
 
 import tpe.Arco;
@@ -48,7 +49,10 @@ public class CSVReader {
 		BackTracking back = new BackTracking(grafo);	
 		String solucionBack = back.metodoBackTracking();
 		System.out.println(solucionBack);
-		
+		System.out.println("------------------------------");
+		Greedy greedy = new Greedy(grafo);
+		String solucionGreedy = greedy.greedy();
+		System.out.println(solucionGreedy);
 	}
 
 	private ArrayList<String[]> readContent() {

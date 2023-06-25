@@ -41,7 +41,7 @@ public class BackTracking {
 			this.metodoBackTrackingRecursivo(estacionInicial, caminoParcial, distanciaParcial,estacionesVisitadas);
 		}
 
-		toReturn = this.armarSolucion(toReturn, this.caminoSolucion, metrica);
+		toReturn = this.armarSolucion(toReturn, this.caminoSolucion);
 		
 		return toReturn;
 	}
@@ -67,7 +67,7 @@ public class BackTracking {
 				if(!estacionesVisitadas.contains(estacionSiguiente)) {
 					Arco<Object>arco = (Arco<Object>) redDeSubterraneos.obtenerArco(estacionActual, estacionSiguiente);
 					caminoParcial.add(arco);
-					distanciaParcial += (Integer)arco.getEtiqueta();//suma la cantidad de metros a nuestra distancia actual
+					distanciaParcial += (Integer)arco.getEtiqueta();
 					
 					metodoBackTrackingRecursivo(estacionSiguiente,caminoParcial,distanciaParcial,estacionesVisitadas);
 
@@ -81,7 +81,7 @@ public class BackTracking {
 		estacionesVisitadas.remove(estacionActual);
 	}
 	
-	private String armarSolucion(String solucion, ArrayList<Arco<Object>>caminoSolucion, int metrica) {
+	private String armarSolucion(String solucion, ArrayList<Arco<Object>>caminoSolucion) {
 		String toReturn = "";
 		toReturn += "Backtracking \n";
 		for(Arco<Object>arco : caminoSolucion) {
