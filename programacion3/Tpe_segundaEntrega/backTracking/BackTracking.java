@@ -27,59 +27,64 @@ public class BackTracking {
 		ArrayList<Arco<Object>>caminoParcial = new ArrayList<>();//va guardando los arcos/tuneles
 		Integer distanciaParcial = 0;
         HashSet<Integer> estacionesVisitadas = new HashSet<>();
-		
-//		ArrayList<Integer>conjuntoEstaciones = new ArrayList<>();
-		
 		Iterator<Integer>iteradorEstaciones = redDeSubterraneos.obtenerVertices();
-
 		while(iteradorEstaciones.hasNext()) {
 			Integer estacionInicial = iteradorEstaciones.next();
 
 			estacionesVisitadas.clear();
-			caminoParcial.clear();
-			
+			caminoParcial.clear();			
 			this.metodoBackTrackingRecursivo(estacionInicial, caminoParcial, distanciaParcial,estacionesVisitadas);
 		}
-
 		toReturn = this.armarSolucion(toReturn, this.caminoSolucion);
-		
 		return toReturn;
 	}
 	
 	
-	private void metodoBackTrackingRecursivo(Integer estacionActual, ArrayList<Arco<Object>>caminoParcial, Integer distanciaParcial, HashSet<Integer>estacionesVisitadas) {
-		metrica++;
-		estacionesVisitadas.add(estacionActual);
-		if(estacionesVisitadas.size() == redDeSubterraneos.cantidadVertices()) {//estado final 
-			//(no deberia ser que el caminoSolucion conecte todas las estaciones?
-			if(distanciaParcial < this.distanciaSolucion || this.distanciaSolucion == 0 ) {//obtenemos distancias 
-				this.distanciaSolucion = distanciaParcial;
-				this.caminoSolucion = new ArrayList<>(caminoParcial);
-			}
-			
-		}else {
-				
-			Iterator<Integer> ady = redDeSubterraneos.obtenerAdyacentes(estacionActual);
+	private void metodoBackTrackingRecursivo(Integer estacionActual, ArrayList<Arco<Object>> caminoParcial, Integer distanciaParcial, HashSet<Integer> estacionesVisitadas) {
+	    metrica++;
+	    estacionesVisitadas.add(estacionActual);
 
-			while(ady.hasNext()) {
+	    if (estacionesVisitadas.size() == redDeSubterraneos.cantidadVertices()) {
+	        if (distanciaParcial < this.distanciaSolucion || this.distanciaSolucion == 0) {
+	            this.distanciaSolucion = distanciaParcial;
+	            this.caminoSolucion = new ArrayList<>(caminoParcial);
+	        }
+	    } else {
+	        Iterator<Integer> ady = redDeSubterraneos.obtenerAdyacentes(estacionActual);
 
-				Integer estacionSiguiente = ady.next();
-				if(!estacionesVisitadas.contains(estacionSiguiente)) {
-					Arco<Object>arco = (Arco<Object>) redDeSubterraneos.obtenerArco(estacionActual, estacionSiguiente);
-					caminoParcial.add(arco);
-					distanciaParcial += (Integer)arco.getEtiqueta();
-					
-					metodoBackTrackingRecursivo(estacionSiguiente,caminoParcial,distanciaParcial,estacionesVisitadas);
+	        while (ady.hasNext()) {
 
-					caminoParcial.remove(arco);
-					distanciaParcial -= (Integer)arco.getEtiqueta();
-				}
-			}
+	            Integer estacionSiguiente = ady.next();
+		         if (!estacionesVisitadas.contains(estacionSiguiente)) {
+	                Arco<Object> arco = (Arco<Object>) redDeSubterraneos.obtenerArco(estacionActual, estacionSiguiente);
+	                caminoParcial.add(arco);
+	                distanciaParcial += (Integer) arco.getEtiqueta();
+	                metodoBackTrackingRecursivo(estacionSiguiente, caminoParcial, distanciaParcial, estacionesVisitadas); // Llamada recursiva para la estacionSiguiente           
+	                caminoParcial.remove(arco);
+	                distanciaParcial -= (Integer) arco.getEtiqueta();
+	            }
+		        
+		       
+	        }
+	    }
+	    estacionesVisitadas.remove(estacionActual);
 
-		}
-
-		estacionesVisitadas.remove(estacionActual);
 	}
+	
+//    Iterator<Integer>adyacentesDeAdy = redDeSubterraneos.obtenerAdyacentes(estacionSiguiente);
+//
+//	while(adyacentesDeAdy.hasNext()) {
+//		Integer estacionAux = adyacentesDeAdy.next();				   
+//		Arco<Object> arco2 = (Arco<Object>) redDeSubterraneos.obtenerArco(estacionSiguiente, estacionAux);
+//        caminoParcial.add(arco2);
+//        distanciaParcial += (Integer) arco2.getEtiqueta();
+//
+//        metodoBackTrackingRecursivo(estacionSiguiente, caminoParcial, distanciaParcial, estacionesVisitadas); // Llamada recursiva para la estacionSiguiente
+//        
+//        caminoParcial.remove(arco2);
+//        distanciaParcial -= (Integer) arco2.getEtiqueta();
+//	}
+
 	
 	private String armarSolucion(String solucion, ArrayList<Arco<Object>>caminoSolucion) {
 		String toReturn = "";

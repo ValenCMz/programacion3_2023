@@ -30,6 +30,12 @@ public class Arco<T> {
 	}
 	
 	@Override
+	public boolean equals(Object obj) {
+		Arco<T>arco = (Arco<T>) obj;
+		return this.verticeOrigen == arco.verticeOrigen && this.verticeDestino == arco.verticeDestino;
+	}
+	
+	@Override
 		public String toString() {
 			String toReturn = "";
 			toReturn += etiqueta;
