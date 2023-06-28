@@ -7,9 +7,13 @@ import java.util.Map.Entry;
 
 public class GrafoDirigido<T> implements Grafo<T> {
 	private HashMap<Integer, HashMap<Integer,Arco<T>>> listTheListAdy; 
+	private int cantArcos;
+	private int cantVertices;
 	
 	public GrafoDirigido() {
 		this.listTheListAdy = new HashMap<>();
+		this.cantArcos = 0;
+		this.cantVertices = 0;
 	}
 
 	@Override
@@ -21,6 +25,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	public void agregarVertice(int verticeId) {
 		if(!this.listTheListAdy.containsKey(verticeId)) {
 			this.listTheListAdy.put(verticeId, new HashMap<>());
+			this.cantVertices++;
 		}
 	}
 
@@ -33,11 +38,13 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		if(this.listTheListAdy.containsKey(verticeId)) {
 			for(int v : this.listTheListAdy.keySet()) {
 				HashMap<Integer, Arco<T>> ady = this.listTheListAdy.get(v);
-				if(ady.containsKey(verticeId)) {
-					borrarArco(v, verticeId);
-				}
+
+				borrarArco(v, verticeId);
+				borrarArco(verticeId, v);
+				
 			}
-			this.listTheListAdy.remove(verticeId);			
+			this.listTheListAdy.remove(verticeId);		
+			this.cantVertices--;
 		}
 	}
 
@@ -52,6 +59,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		if(!mapInterno.containsKey(verticeDestino)) {
 			Arco<T> arcoNew = new Arco<T>(verticeOrigen, verticeDestino, etiqueta);
 			mapInterno.put(verticeDestino, arcoNew);
+			this.cantArcos++;
 		}else {
 			System.out.println("Ya existe este arco");
 		}	
@@ -66,6 +74,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		HashMap<Integer, Arco<T>>ady = this.listTheListAdy.get(verticeId1);
 		if(this.existeArco(verticeId1, verticeId2)) {
 			ady.remove(verticeId2);
+			this.cantArcos--;
 		}
 	}
 
@@ -108,26 +117,19 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	@Override
 	/**
 	* Complejidad: O(1) donde 1 es una unidad constante de tiempo debido a que debe
-	* "solo obtener el tamaño de la estructura de datos interna, 
-	* y esto no depende del tamaño del problem o delos datos de entrada"
+	* "solo debe retornar la variable auxiliar, y esto no depende del tamaño del problema o de los datos de entrada"
 	*/
 	public int cantidadVertices() {
-		return this.listTheListAdy.size();
+		return this.cantVertices;
 	}
 
 	@Override
 	/**
-	* Complejidad: O(n) donde n es numero de pares clave valor debido a que debe
-	* "debe recorrer todos los elementos de listTheListAdy para poder obtener los arcos 
-	* salientes de cada vertice"
+	* Complejidad: O(1) donde 1 es una unidad constante de tiempo debido a que debe
+	* "solo debe retornar la variable auxiliar, y esto no depende del tamaño del problema o de los datos de entrada"
 	*/
 	public int cantidadArcos() {
-		int cont = 0;
-		for(int v : this.listTheListAdy.keySet()) {
-			HashMap<Integer, Arco<T>> ady = this.listTheListAdy.get(v);
-			cont += ady.size();
-		}
-		return cont;
+		return this.cantArcos;
 	}
 
 	@Override

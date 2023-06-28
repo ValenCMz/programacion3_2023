@@ -13,11 +13,13 @@ public class Greedy {
 	private Grafo<?> redDeSubterraneos;
 	private int distanciaSolucion;
 	private int metrica;
+	private UnionFind unf;
 	
 	public Greedy(Grafo<?> grafo) {
 		this.redDeSubterraneos = grafo;
 		this.distanciaSolucion = 0;
 		this.metrica = 0;
+		this.unf = new UnionFind(redDeSubterraneos);
 	}
 	
 	public String Greedy() {
@@ -42,17 +44,26 @@ public class Greedy {
 			
 			verticesVisitados.add(verticeDestino);
 			arcosSolucion.add(arcoMasChico);
+			unf.union(arcoMasChico.getVerticeOrigen(), verticeDestino);
             distanciaSolucion += (Integer) arcoMasChico.getEtiqueta();
             
     		this.actualizarArcos(verticeDestino, arcosCandidatos);
-
 		}
 		String toReturn = "";
-		
-		toReturn = armarSolucion(toReturn, arcosSolucion);
+
+		if(esSolucion(arcosSolucion)) {
+			toReturn = armarSolucion(toReturn, arcosSolucion);
+		}else {
+			toReturn = "No hay solucion";
+		}
 		return toReturn;
-		
+				
 	}
+	
+	public boolean esSolucion(ArrayList<Arco<Object>>solucion) {
+		return this.unf.areAllVerticesConnected(redDeSubterraneos.cantidadVertices());
+	}
+	
 	
 	public void actualizarArcos(Integer vertice, ArrayList<Arco<Object>> arcosCandidatos) {
 		Iterator<?> a = redDeSubterraneos.obtenerArcos(vertice);
