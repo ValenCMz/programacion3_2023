@@ -46,7 +46,6 @@ public class CSVReader {
 			grafo.agregarArco(origen, destino, etiqueta);
 		}
 		
-		System.out.println(grafo);
 
 		BackTracking back = new BackTracking(grafo);	
 		String solucionBack = back.metodoBackTracking();

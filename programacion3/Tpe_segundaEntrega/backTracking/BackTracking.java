@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import Greedy.UnionFind;
 import tpe.Arco;
 import tpe.Grafo;
 
@@ -14,61 +15,73 @@ public class BackTracking {
 	private ArrayList<Arco<Object>>caminoSolucion;
 	private Integer distanciaSolucion;
 	private int metrica;
+	private UnionFind unf;
 
 	public BackTracking(Grafo<?>grafo) {
 		this.redDeSubterraneos = grafo;
 		this.caminoSolucion = new ArrayList<>();
 		this.distanciaSolucion = 0;
 		this.metrica = 0;
+		this.unf = new UnionFind(redDeSubterraneos);
 	}
 	
 	public String metodoBackTracking() {
 		String toReturn = "";
 		ArrayList<Arco<Object>>caminoParcial = new ArrayList<>();//va guardando los arcos/tuneles
 		Integer distanciaParcial = 0;
-        HashSet<Integer> estacionesVisitadas = new HashSet<>();
+		HashSet<Arco<Object>>arcosVisitados = new HashSet<>();
 		Iterator<Integer>iteradorEstaciones = redDeSubterraneos.obtenerVertices();
 		while(iteradorEstaciones.hasNext()) {
 			Integer estacionInicial = iteradorEstaciones.next();
-
-			estacionesVisitadas.clear();
+			arcosVisitados.clear();
 			caminoParcial.clear();			
-			this.metodoBackTrackingRecursivo(estacionInicial, caminoParcial, distanciaParcial,estacionesVisitadas);
+			this.metodoBackTrackingRecursivo(estacionInicial, caminoParcial, distanciaParcial, arcosVisitados);
 		}
 		toReturn = this.armarSolucion(toReturn, this.caminoSolucion);
 		return toReturn;
 	}
 	
 	
-	private void metodoBackTrackingRecursivo(Integer estacionActual, ArrayList<Arco<Object>> caminoParcial, Integer distanciaParcial, HashSet<Integer> estacionesVisitadas) {
+	private void metodoBackTrackingRecursivo(Integer estacionActual, ArrayList<Arco<Object>> caminoParcial, Integer distanciaParcial,HashSet<Arco<Object>>arcosVisitados) {
 	    metrica++;
-	    estacionesVisitadas.add(estacionActual);
 
-	    if (estacionesVisitadas.size() == redDeSubterraneos.cantidadVertices()) {
+	    if (unf.areAllVerticesConnected(redDeSubterraneos.cantidadVertices())) {
 	        if (distanciaParcial < this.distanciaSolucion || this.distanciaSolucion == 0) {
 	            this.distanciaSolucion = distanciaParcial;
 	            this.caminoSolucion = new ArrayList<>(caminoParcial);
 	        }
 	    } else {
-	        Iterator<Integer> ady = redDeSubterraneos.obtenerAdyacentes(estacionActual);
+	        Iterator<?> arcos = redDeSubterraneos.obtenerArcos(estacionActual);
 
-	        while (ady.hasNext()) {
+	        while (arcos.hasNext()) {
 
-	            Integer estacionSiguiente = ady.next();
-		         if (!estacionesVisitadas.contains(estacionSiguiente)) {
-	                Arco<Object> arco = (Arco<Object>) redDeSubterraneos.obtenerArco(estacionActual, estacionSiguiente);
-	                caminoParcial.add(arco);
+	            Arco<Object> arco = (Arco<Object>) arcos.next();
+
+	            if(!this.contieneArco(arcosVisitados, arco)) {
+		            arcosVisitados.add(arco);
+
+	            	caminoParcial.add(arco);
 	                distanciaParcial += (Integer) arco.getEtiqueta();
-	                metodoBackTrackingRecursivo(estacionSiguiente, caminoParcial, distanciaParcial, estacionesVisitadas); // Llamada recursiva para la estacionSiguiente           
+	                unf.union(estacionActual, arco.getVerticeDestino());
+	                metodoBackTrackingRecursivo(arco.getVerticeDestino(), caminoParcial, distanciaParcial,arcosVisitados); // Llamada recursiva para la estacionSiguiente           
 	                caminoParcial.remove(arco);
 	                distanciaParcial -= (Integer) arco.getEtiqueta();
-	            }
-		        
-		       
+
+	                arcosVisitados.remove(arco);
+
+	            }	            
 	        }
 	    }
-	    estacionesVisitadas.remove(estacionActual);
 
+	}
+	
+	public boolean contieneArco(HashSet<Arco<Object>>arcosVisitados, Arco<Object>arco) {
+		for(Arco<Object>a : arcosVisitados) {
+			if(a.equals(arco)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 //    Iterator<Integer>adyacentesDeAdy = redDeSubterraneos.obtenerAdyacentes(estacionSiguiente);
