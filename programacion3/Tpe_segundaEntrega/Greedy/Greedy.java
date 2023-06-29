@@ -22,7 +22,7 @@ public class Greedy {
 		this.unf = new UnionFind(redDeSubterraneos);
 	}
 	
-	public String Greedy() {
+	public void Greedy() {
 		HashSet<Integer>verticesVisitados = new HashSet<>();
 		ArrayList<Arco<Object>>arcosSolucion = new ArrayList<>();
 		ArrayList<Arco<Object>>arcosCandidatos = new ArrayList<>();
@@ -52,11 +52,10 @@ public class Greedy {
 		String toReturn = "";
 
 		if(esSolucion(arcosSolucion)) {
-			toReturn = armarSolucion(toReturn, arcosSolucion);
+			System.out.println(armarSolucion(toReturn, arcosSolucion)); 
 		}else {
-			toReturn = "No hay solucion";
+			System.out.println("No se encontro una solucion");
 		}
-		return toReturn;
 				
 	}
 	
@@ -87,7 +86,7 @@ public class Greedy {
 	
 	private String armarSolucion(String solucion, ArrayList<Arco<Object>>caminoSolucion) {
 		String toReturn = "";
-		toReturn += "Greedy \n";
+		toReturn += "Greedy - Prim \n";
 		for(Arco<Object>arco : caminoSolucion) {
 			
 			toReturn += "E" + arco.getVerticeOrigen() + "-" + "E" + arco.getVerticeDestino() + ",";
@@ -96,7 +95,9 @@ public class Greedy {
 		toReturn = toReturn.substring(0,toReturn.length()-1);
 		toReturn += "\n";
 		toReturn += this.distanciaSolucion + "Kms \n";
-		toReturn += this.metrica + " metrica";
+		toReturn += this.metrica + " metrica \n";
+		toReturn += "-----------------------------------------";
+
 		return toReturn;
 	}
 	

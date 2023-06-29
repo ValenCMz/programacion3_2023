@@ -45,21 +45,12 @@ public class CSVReader {
 			grafo.agregarVertice(destino);
 			grafo.agregarArco(origen, destino, etiqueta);
 		}
-		
-
+	
 		BackTracking back = new BackTracking(grafo);	
-		String solucionBack = back.metodoBackTracking();
-		BackPrueba backp = new BackPrueba(grafo);
-		backp.backTracking();
-		System.out.println("------------------------------");
-
-		System.out.println(solucionBack);
-		System.out.println("------------------------------");
-
-		
+		back.metodoBackTracking();
+	
 		Greedy prim = new Greedy(grafo);
-		String solucionPrim = prim.Greedy();
-		System.out.println(solucionPrim);
+		prim.Greedy();
 	}
 
 	private ArrayList<String[]> readContent() {

@@ -7,7 +7,7 @@ import java.util.Map;
 
 import tpe.Grafo;
 
-public class UnionFind {
+public class UnionFind implements Cloneable{
     private Map<Integer, Integer> parent;
 
     public UnionFind(Grafo<?> grafo) {
@@ -59,4 +59,18 @@ public class UnionFind {
         }
         return true; // Todos los vértices tienen el mismo representante, están todos conectados
     }
+
+    public UnionFind clone() {
+    	UnionFind cloned;
+    	try {
+    		cloned= (UnionFind)super.clone();
+    	}catch(CloneNotSupportedException e) {
+    		 throw new RuntimeException("No se puede clonar UnionFind");
+    	}
+    	 cloned.parent = new HashMap<>(parent); // Crear una copia profunda del Map
+    	return cloned;
+    }
+
+
+    
 }
