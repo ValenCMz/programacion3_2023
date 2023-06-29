@@ -1,14 +1,11 @@
 package backTracking;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
 
-import Greedy.UnionFind;
+
 import tpe.Arco;
 import tpe.Grafo;
 
@@ -32,7 +29,6 @@ public class BackTracking {
 	public void metodoBackTracking() {
 		String toReturn = "";
 		ArrayList<Arco<Object>>caminoParcial = new ArrayList<>();//va guardando los arcos/tuneles
-		Integer distanciaParcial = 0;
 		HashSet<Arco<Object>>arcosVisitados = new HashSet<>();
 		Iterator<?>iteradorArco = redDeSubterraneos.obtenerArcos();
 		ArrayList<Arco<Object>>arcos = new ArrayList<>();
@@ -40,22 +36,21 @@ public class BackTracking {
 			arcos.add((Arco<Object>) iteradorArco.next());
 		}
 		
-		this.metodoBackTrackingRecursivo(arcos, caminoParcial, distanciaParcial, arcosVisitados);
+		this.metodoBackTrackingRecursivo(arcos, caminoParcial, arcosVisitados);
 		
 		toReturn = this.armarSolucion(toReturn, this.caminoSolucion);
 		System.out.println(toReturn);
 	}
 	
 	
-	private void metodoBackTrackingRecursivo(ArrayList<Arco<Object>>arcos , ArrayList<Arco<Object>> caminoParcial, Integer distanciaParcial,HashSet<Arco<Object>>arcosVisitados) {
+	private void metodoBackTrackingRecursivo(ArrayList<Arco<Object>>arcos , ArrayList<Arco<Object>> caminoParcial,HashSet<Arco<Object>>arcosVisitados) {
 	    metrica++;	    
 	    if (this.esConexo(caminoParcial)) {
 	        if (this.getSuma(caminoParcial)< this.distanciaSolucion || distanciaSolucion == 0) {
 	            this.distanciaSolucion = this.getSuma(caminoParcial);
 	            this.caminoSolucion = new ArrayList<>(caminoParcial);
 	        }
-	        //si arcos no esta vacio
-	    } else if (!arcos.isEmpty()) {
+	    } else {
 	    	//itero todos los arcos disponibles
 	        for (int i = 0; i < arcos.size(); i++) {
 	        	//traigo el arco a iterar
@@ -66,14 +61,13 @@ public class BackTracking {
 	                caminoParcial.add(arco);
 	                arcos.remove(i);
 	                //PODA
-	                if(this.getSuma(caminoParcial) < distanciaSolucion || distanciaSolucion==0) {
-	                	metodoBackTrackingRecursivo(arcos, caminoParcial, distanciaParcial, arcosVisitados);
+	                if(this.getSuma(caminoParcial) < distanciaSolucion || distanciaSolucion == 0) {
+	                	metodoBackTrackingRecursivo(arcos, caminoParcial, arcosVisitados);
 	                }
 	                //reailzo el backTracking
 	                arcosVisitados.remove(arco);	                
 	                caminoParcial.remove(arco);
-	                arcos.add(arco);
-				
+	                arcos.add(arco);				
 	            }
 	        }
 	    }
@@ -103,10 +97,6 @@ public class BackTracking {
 	            // Realizar DFS en el vértice de destino si no ha sido visitado
 	            dfs(arco.getVerticeDestino(), caminoParcial, verticesVisitados);
 	        } 
-	        else if (arco.getVerticeDestino() == vertice && !verticesVisitados.contains(arco.getVerticeOrigen())) {
-	            // Realizar DFS en el vértice de origen si no ha sido visitado
-	            dfs(arco.getVerticeOrigen(), caminoParcial, verticesVisitados);
-	        }
 	    }
 	}
 	

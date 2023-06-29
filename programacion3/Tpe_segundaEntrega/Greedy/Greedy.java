@@ -22,7 +22,7 @@ public class Greedy {
 		this.unf = new UnionFind(redDeSubterraneos);
 	}
 	
-	public void Greedy() {
+	public void greedy() {
 		HashSet<Integer>verticesVisitados = new HashSet<>();
 		ArrayList<Arco<Object>>arcosSolucion = new ArrayList<>();
 		ArrayList<Arco<Object>>arcosCandidatos = new ArrayList<>();

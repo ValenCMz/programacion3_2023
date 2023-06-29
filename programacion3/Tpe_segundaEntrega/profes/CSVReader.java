@@ -5,14 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map.Entry;
-
 import Greedy.Greedy;
-import backTracking.BackPrueba;
 import backTracking.BackTracking;
-
-import tpe.Arco;
 import tpe.Grafo;
 import tpe.GrafoNoDirigido;
 
@@ -20,6 +14,7 @@ import tpe.GrafoNoDirigido;
 public class CSVReader {
 
 	private String path;
+	private String dataSet;
 	
 	public CSVReader(String path) {
 		this.path = path;
@@ -45,12 +40,13 @@ public class CSVReader {
 			grafo.agregarVertice(destino);
 			grafo.agregarArco(origen, destino, etiqueta);
 		}
-	
+		
 		BackTracking back = new BackTracking(grafo);	
 		back.metodoBackTracking();
+
 	
 		Greedy prim = new Greedy(grafo);
-		prim.Greedy();
+		prim.greedy();
 	}
 
 	private ArrayList<String[]> readContent() {
