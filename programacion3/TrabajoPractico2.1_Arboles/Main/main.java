@@ -193,25 +193,20 @@ public class main {
 //			
 			//usado para ejercicio 3
 			Tree prueba = new Tree(6);
+			prueba.add(6);
 			prueba.add(2);
 			prueba.add(1);
 			prueba.add(4);
 			prueba.add(10);
-			prueba.add(11);
 			prueba.add(8);
 			prueba.add(7);
 			prueba.add(9);
+			prueba.add(11);
 			prueba.imprimirAbolPreOrden();
-			ArrayList<Integer>arrayPrueba = new ArrayList<>();
-			arrayPrueba = prueba.valuesBetweenTwoParameters(7, 10);
-			if(arrayPrueba==null) {
-				System.out.println("es null");
-			}
-			for (Integer i : arrayPrueba) {
-				System.out.println(i);
-			}
 			
-	
+			System.out.println("Ejercicio 3");
+			System.out.println(prueba.ej3(8));
+			
 			
 	}
 

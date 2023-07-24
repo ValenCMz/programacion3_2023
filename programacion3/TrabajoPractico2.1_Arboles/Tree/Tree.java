@@ -416,5 +416,34 @@ public class Tree {
 	}
 	
 	
+	/*
+	* Ejercicio 3
+	Dado un árbol binario de búsqueda que almacena
+	números enteros y un valor de entrada K, implementar un
+	algoritmo que permita obtener un listado con los valores
+	de todas las hojas cuyo valor supere K. Por ejemplo, para
+	el árbol de la derecha, con un valor K = 8, el resultado
+	debería ser [9, 11].
+	 */
+	
+	public ArrayList<Integer> ej3(int k) {
+		ArrayList<Integer>toReturn = new ArrayList<Integer>();
+		
+			if(this.getValue() > k && (this.left == null && this.right == null)) {
+				toReturn.add(this.getValue());
+			}
+					
+			if(this.left != null) {
+				toReturn.addAll(this.left.ej3(k));
+			}
+			
+			if(this.right!=null) {
+				toReturn.addAll(this.right.ej3(k));
+			}
+		
+		return toReturn;
+	
+	}
+	
 
 }

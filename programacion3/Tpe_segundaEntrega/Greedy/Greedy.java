@@ -39,7 +39,7 @@ public class Greedy {
 			Integer verticeDestino = arcoMasChico.getVerticeDestino();
 			
 			if(verticesVisitados.contains(verticeDestino)) {
-				continue;//Esto lo que hace es avanzar con el siguiente si es que ya contengo en visitados el vertice
+				continue;
 			}
 			
 			verticesVisitados.add(verticeDestino);
@@ -55,8 +55,7 @@ public class Greedy {
 			System.out.println(armarSolucion(toReturn, arcosSolucion)); 
 		}else {
 			System.out.println("No se encontro una solucion");
-		}
-				
+		}			
 	}
 	
 	public boolean esSolucion(ArrayList<Arco<Object>>solucion) {
@@ -79,14 +78,13 @@ public class Greedy {
 			if((Integer) arco.getEtiqueta() < (Integer) toReturn.getEtiqueta()) {
 				toReturn = arco;
 			}
-		}
-				
+		}				
 		return toReturn;
 	}
 	
 	private String armarSolucion(String solucion, ArrayList<Arco<Object>>caminoSolucion) {
 		String toReturn = "";
-		toReturn += "Greedy - Prim \n";
+		toReturn += "Greedy \n";
 		for(Arco<Object>arco : caminoSolucion) {
 			
 			toReturn += "E" + arco.getVerticeOrigen() + "-" + "E" + arco.getVerticeDestino() + ",";
@@ -97,7 +95,6 @@ public class Greedy {
 		toReturn += this.distanciaSolucion + "Kms \n";
 		toReturn += this.metrica + " metrica \n";
 		toReturn += "-----------------------------------------";
-
 		return toReturn;
 	}
 	
