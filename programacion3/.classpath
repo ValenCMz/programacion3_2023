@@ -13,5 +13,7 @@
 	<classpathentry kind="src" path="TrabajoPractico3_Grafo"/>
 	<classpathentry kind="src" path="BackTracking"/>
 	<classpathentry kind="src" path="Tpe_segundaEntrega"/>
+	<classpathentry kind="src" path="final"/>
+	<classpathentry kind="src" path="Main"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

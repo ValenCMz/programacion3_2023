@@ -18,7 +18,7 @@ public class Tree {
 	{
 		this.value =null;
 		this.left =null;
-			this.right = null;
+		this.right = null;
 	}
 	
 	public Integer getValue() {
