@@ -19,13 +19,24 @@ public class main {
 		grafo.agregarVertice(2);
 		grafo.agregarVertice(3);
 		grafo.agregarVertice(4);
+		grafo.agregarVertice(5);
+		grafo.agregarVertice(6);
 
-		grafo.agregarArco(1, 2, null);
-		grafo.agregarArco(2, 1, null);
-		grafo.agregarArco(1, 3, null);
-		grafo.agregarArco(3, 2, null);
-		grafo.agregarArco(2, 4, null);
-//		grafo.agregarArco(4, 2, null);
+
+		grafo.agregarArco(1, 2, 7);
+		grafo.agregarArco(1, 3, 3);
+		grafo.agregarArco(2, 3, 1);
+		grafo.agregarArco(2, 4, 6);
+		grafo.agregarArco(3, 5, 8);
+		grafo.agregarArco(4, 3, 3);
+		grafo.agregarArco(4, 6, 2);
+		grafo.agregarArco(5, 4, 2);
+		grafo.agregarArco(5, 6, 8);
+
+
+
+
+
 
 
 
@@ -63,9 +74,8 @@ public class main {
 //
 //        E1.IncisoB(arr,0);
 		
-		
-		Ejercicio4 e4 = new Ejercicio4();
-		System.out.println(e4.esConexo(grafo));
+		Parcial_15_6_18.Ejercicio1 e1 = new Parcial_15_6_18.Ejercicio1();
+		System.out.println(e1.ej1(grafo, 1, 6));
 	}
 
 }
